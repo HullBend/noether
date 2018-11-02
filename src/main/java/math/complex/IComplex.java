@@ -41,21 +41,21 @@ public interface IComplex {
      * and PI (inclusive), with negative values returned for numbers with
      * negative imaginary parts. A.k.a {@code phase} or {@code angle}.
      * 
-     * @return
+     * @return the angle of this complex number
      */
     double arg();
 
     /**
      * A.k.a {@code magnitude} or {@code modulus}.
      * 
-     * @return
+     * @return the absolute value of this number
      */
     double abs();
 
     /**
      * Multiplicative inverse: {@code 1.0 / this}.
      * 
-     * @return
+     * @return the multiplicative inverse of this complex number
      */
     IComplex inv();
 
@@ -67,21 +67,21 @@ public interface IComplex {
      * Multiplication with a real number.
      * 
      * @param alpha
-     * @return
+     * @return the result of the multiplication
      */
     IComplex scale(double alpha);
 
     /**
      * Natural logarithm: {@code ln(this)}.
      * 
-     * @return
+     * @return the natural log of this complex number
      */
     IComplex ln();
 
     /**
      * Exponential function: {@code e}<sup>{@code this}</sup>.
      * 
-     * @return
+     * @return {@code e} to the power of this complex number
      */
     IComplex exp();
 
@@ -92,7 +92,7 @@ public interface IComplex {
      * 
      * @param exponent
      *            real exponent
-     * @return
+     * @return this complex number to the power of the real exponent
      */
     IComplex pow(double exponent);
 
@@ -103,7 +103,7 @@ public interface IComplex {
      * 
      * @param exponent
      *            complex exponent
-     * @return
+     * @return this complex number to the power of the complex exponent
      */
     IComplex pow(IComplex exponent);
 
