@@ -86,7 +86,7 @@ public interface IComplex {
     IComplex exp();
 
     /**
-     * Power function of complex base with real exponent.
+     * Power function of this complex base with a real exponent.
      * <p>
      * Computes {@code this}<sup>{@code exponent}</sup>
      * 
@@ -97,7 +97,7 @@ public interface IComplex {
     IComplex pow(double exponent);
 
     /**
-     * Power function of complex base with complex exponent.
+     * Power function of this complex base with a complex exponent.
      * <p>
      * Computes {@code this}<sup>{@code exponent}</sup>
      * 
