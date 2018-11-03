@@ -81,9 +81,10 @@ public final class MComplex extends AComplex implements IComplex {
             im = Double.POSITIVE_INFINITY;
             return this;
         }
-        double real = re;
-        re = real * that.re() - im * that.im();
-        im = im * that.re() + real * that.im();
+        double this_re = re;
+        double that_re = that.re();
+        re = this_re * that_re - im * that.im();
+        im = im * that_re + this_re * that.im();
         return this;
     }
 

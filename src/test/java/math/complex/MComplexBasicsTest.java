@@ -272,6 +272,15 @@ public final class MComplexBasicsTest {
     }
 
     @Test
+    public void testMul2() {
+        IComplex x = new MComplex(3.0, 4.0);
+        IComplex y = x;
+        IComplex z = x.mul(y);
+        Assert.assertEquals(-7.0, z.re(), 1.0e-5);
+        Assert.assertEquals(24.0, z.im(), 1.0e-5);
+    }
+
+    @Test
     public void testMultiplyNaN() {
         IComplex x = new MComplex(3.0, 4.0);
         IComplex z = x.mul(IComplex.NaN);
