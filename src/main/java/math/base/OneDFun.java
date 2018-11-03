@@ -84,19 +84,15 @@ public abstract class OneDFun {
         @Override
         public double apply(double x) {
             double fx = fun.apply(x);
-            double xi = x;
-            double hi = (xi != 0.0) ? DIFF_SCALE * Math.abs(xi) : DIFF_SCALE;
+            double h = (x != 0.0) ? DIFF_SCALE * Math.abs(x) : DIFF_SCALE;
 
-            double xi_plus_hi = xi + hi;
-
+            double x_plus_h = x + h;
             // account for potential round-off errors
-            hi = xi_plus_hi - xi;
-
-            x = xi_plus_hi;
+            h = x_plus_h - x;
             // new function value for advance in variable
-            double fx_plus_hi = fun.apply(x);
+            double fx_plus_h = fun.apply(x_plus_h);
             // estimated gradient
-            return (fx_plus_hi - fx) / hi;
+            return (fx_plus_h - fx) / h;
         }
     }
 
