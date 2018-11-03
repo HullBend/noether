@@ -48,7 +48,7 @@ public interface IComplex {
     /**
      * A.k.a {@code magnitude} or {@code modulus}.
      * 
-     * @return the absolute value of this number
+     * @return the absolute value of this complex number
      */
     double abs();
 
