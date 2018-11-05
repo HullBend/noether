@@ -1,7 +1,7 @@
 package math.chart;
 
 import java.awt.Graphics;
-import java.util.ArrayDeque;
+import java.util.ArrayList;
 
 import info.monitorenter.gui.chart.ITracePoint2D;
 import info.monitorenter.gui.chart.traces.painters.ATracePainter;
@@ -14,10 +14,10 @@ import info.monitorenter.gui.chart.traces.painters.ATracePainter;
 final class TracePainterPolylineOpt extends ATracePainter {
 
     /* list of x coordinates collected in one paint iteration */
-    private ArrayDeque<Integer> m_xPoints;
+    private ArrayList<Integer> m_xPoints;
 
     /* list of y coordinates collected in one paint iteration */
-    private ArrayDeque<Integer> m_yPoints;
+    private ArrayList<Integer> m_yPoints;
 
     TracePainterPolylineOpt() {
     }
@@ -48,20 +48,20 @@ final class TracePainterPolylineOpt extends ATracePainter {
     @Override
     public void paintPoint(int absoluteX, int absoluteY, int nextX, int nextY, Graphics g, ITracePoint2D original) {
         super.paintPoint(absoluteX, absoluteY, nextX, nextY, g, original);
-        m_xPoints.addLast(Integer.valueOf(absoluteX));
-        m_yPoints.addLast(Integer.valueOf(absoluteY));
+        m_xPoints.add(Integer.valueOf(absoluteX));
+        m_yPoints.add(Integer.valueOf(absoluteY));
     }
 
     @Override
     public void startPaintIteration(Graphics g2d) {
         super.startPaintIteration(g2d);
         if (m_xPoints == null) {
-            m_xPoints = new ArrayDeque<Integer>(8192);
+            m_xPoints = new ArrayList<Integer>(8192);
         } else {
             m_xPoints.clear();
         }
         if (m_yPoints == null) {
-            m_yPoints = new ArrayDeque<Integer>(8192);
+            m_yPoints = new ArrayList<Integer>(8192);
         } else {
             m_yPoints.clear();
         }
