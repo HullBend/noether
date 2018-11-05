@@ -90,7 +90,7 @@ public class TracePoint extends Point2D.Double implements ITracePoint2D {
     public double getEuclidDistance(double xNormalized, double yNormalized) {
         double xDist = Math.abs(m_scaledX - xNormalized);
         double yDist = Math.abs(m_scaledY - yNormalized);
-        return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
+        return Math.sqrt((xDist * xDist) + (yDist * yDist));
     }
 
     @Override
