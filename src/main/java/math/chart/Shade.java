@@ -17,23 +17,29 @@ package math.chart;
 
 import java.awt.Color;
 
-public final class Shade {
+public enum Shade {
 
-    public static final Color WHITE = Color.WHITE;
-    public static final Color LIGHT_GRAY = Color.LIGHT_GRAY;
-    public static final Color GRAY = Color.GRAY;
-    public static final Color DARK_GRAY = Color.DARK_GRAY;
-    public static final Color BLACK = Color.BLACK;
-    public static final Color RED = Color.RED;
-    public static final Color PINK = Color.PINK;
-    public static final Color ORANGE = Color.ORANGE;
-    public static final Color YELLOW = Color.YELLOW;
-    public static final Color GREEN = Color.GREEN;
-    public static final Color MAGENTA = Color.MAGENTA;
-    public static final Color CYAN = Color.CYAN;
-    public static final Color BLUE = Color.BLUE;
+    WHITE(Color.WHITE),
+    LIGHT_GRAY(Color.LIGHT_GRAY),
+    GRAY(Color.GRAY),
+    DARK_GRAY(Color.DARK_GRAY),
+    BLACK(Color.BLACK),
+    RED(Color.RED),
+    PINK(Color.PINK),
+    ORANGE(Color.ORANGE),
+    YELLOW(Color.YELLOW),
+    GREEN(Color.GREEN),
+    MAGENTA(Color.MAGENTA),
+    CYAN(Color.CYAN),
+    BLUE(Color.BLUE);
 
-    private Shade() {
-        throw new AssertionError();
+    public Color getColor() {
+        return color;
+    }
+
+    private Color color;
+
+    private Shade(Color color) {
+        this.color = color;
     }
 }
