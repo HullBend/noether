@@ -37,6 +37,7 @@ public class Graph {
     private static final Shade[] shades = { Shade.RED, Shade.BLUE, Shade.BLACK, Shade.YELLOW, Shade.GREEN, Shade.ORANGE,
             Shade.CYAN, Shade.MAGENTA, Shade.DARK_GRAY };
     private int nextShade = 0;
+    private int nextPlot = 1;
 
     private final JFrame frame = createFrame("");
     private final Chart chart;
@@ -47,6 +48,10 @@ public class Graph {
         }
         chart = new Chart();
         frame.getContentPane().add(chart);
+    }
+
+    public Graph plot(LinSpace data) {
+        return plot("curve-" + nextPlot++, data);
     }
 
     public Graph plot(String plotName, LinSpace data) {
