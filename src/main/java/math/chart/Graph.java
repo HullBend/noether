@@ -34,6 +34,10 @@ import math.chart.TracePoint;
  */
 public class Graph {
 
+    private static final Shade[] shades = { Shade.RED, Shade.BLUE, Shade.BLACK, Shade.YELLOW, Shade.GREEN, Shade.ORANGE,
+            Shade.CYAN, Shade.MAGENTA, Shade.DARK_GRAY };
+    private int nextShade = 0;
+
     private final JFrame frame = createFrame("");
     private final Chart chart;
 
@@ -45,7 +49,14 @@ public class Graph {
         frame.getContentPane().add(chart);
     }
 
-    public void plot(String plotName, Shade color, LinSpace data) {
+    public Graph plot(String plotName, LinSpace data) {
+        if (nextShade == shades.length) {
+            nextShade = 0;
+        }
+        return plot(plotName, shades[nextShade++], data);
+    }
+
+    public Graph plot(String plotName, Shade color, LinSpace data) {
         if (!data.hasValues()) {
             throw new NoSuchElementException("no data");
         }
@@ -59,10 +70,16 @@ public class Graph {
                 trace.addPoint(new TracePoint(x, y));
             }
         });
+        return this;
     }
 
     public void show() {
         frame.setVisible(true);
+    }
+
+    public Graph useAntialiasing() {
+        chart.setUseAntialiasing(true);
+        return this;
     }
 
     private static JFrame createFrame(String title) {
@@ -70,14 +87,12 @@ public class Graph {
         JFrame frame = new JFrame(title);
         // set a default size
         frame.setSize(1000, 750);
-        // enable close button 
-        frame.addWindowListener(
-            new WindowAdapter(){
-              public void windowClosing(WindowEvent e){
-                  System.exit(0);
-              }
+        // enable close button
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
             }
-          );
+        });
         // center frame
         frame.setLocationRelativeTo(null);
         return frame;
