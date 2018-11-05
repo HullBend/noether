@@ -33,6 +33,7 @@ public class Trace extends ATrace2D implements ITrace2D {
 
     public Trace(String name) {
         super.setName(name);
+        super.setTracePainter(new TracePainterPolylineOpt());
     }
 
     @Override
