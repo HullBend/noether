@@ -44,6 +44,11 @@ public final class Ln extends OneDFun {
         public double apply(double x) {
             return Math.log(x);
         }
+
+        @Override
+        public String toString() {
+            return "ln ";
+        }
     }
 
     private static final class Deriv1 implements DFunction {

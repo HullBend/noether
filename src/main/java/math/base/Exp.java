@@ -43,6 +43,11 @@ public final class Exp extends OneDFun {
         public double apply(double x) {
             return Math.exp(x);
         }
+
+        @Override
+        public String toString() {
+            return "exp ";
+        }
     }
 
     public String toString() {

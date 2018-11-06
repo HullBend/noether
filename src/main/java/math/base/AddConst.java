@@ -53,6 +53,11 @@ public final class AddConst extends OneDFun {
         public double apply(double x) {
             return x + b;
         }
+
+        @Override
+        public String toString() {
+            return "b +";
+        }
     }
 
     private static final class Deriv1 implements DFunction {

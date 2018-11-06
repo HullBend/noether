@@ -44,6 +44,11 @@ public final class ID extends OneDFun {
         public double apply(double x) {
             return x;
         }
+
+        @Override
+        public String toString() {
+            return " id ";
+        }
     }
 
     private static final class Deriv1 implements DFunction {

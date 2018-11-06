@@ -44,6 +44,11 @@ public final class Inv extends OneDFun {
         public double apply(double x) {
             return 1.0 / x;
         }
+
+        @Override
+        public String toString() {
+            return "1 / ";
+        }
     }
 
     private static final class Deriv1 implements DFunction {

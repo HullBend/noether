@@ -44,6 +44,11 @@ public final class Sin extends OneDFun {
         public double apply(double x) {
             return Math.sin(x);
         }
+
+        @Override
+        public String toString() {
+            return "sin ";
+        }
     }
 
     private static final class Deriv1 implements DFunction {

@@ -44,6 +44,11 @@ public final class Abs extends OneDFun {
         public double apply(double x) {
             return Math.abs(x);
         }
+
+        @Override
+        public String toString() {
+            return "abs ";
+        }
     }
 
     private static final class Deriv1 implements DFunction {

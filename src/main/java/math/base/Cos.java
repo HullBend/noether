@@ -44,6 +44,11 @@ public final class Cos extends OneDFun {
         public double apply(double x) {
             return Math.cos(x);
         }
+
+        @Override
+        public String toString() {
+            return "cos ";
+        }
     }
 
     private static final class Deriv1 implements DFunction {

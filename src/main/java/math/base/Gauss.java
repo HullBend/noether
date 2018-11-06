@@ -55,6 +55,11 @@ public final class Gauss extends OneDFun {
         public double apply(double x) {
             return Math.exp(-a * (x * x));
         }
+
+        @Override
+        public String toString() {
+            return "exp(-" + a + " * ";
+        }
     }
 
     private static final class Deriv1 implements DFunction {

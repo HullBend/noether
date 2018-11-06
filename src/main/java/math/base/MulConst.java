@@ -54,6 +54,11 @@ public final class MulConst extends OneDFun {
         public double apply(double x) {
             return a * x;
         }
+
+        @Override
+        public String toString() {
+            return "a *";
+        }
     }
 
     private static final class Deriv1 implements DFunction {
