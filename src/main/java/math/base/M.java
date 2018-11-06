@@ -25,6 +25,10 @@ public final class M {
         return LinSpace.linspace(start, end, numberOfPoints);
     }
 
+    public static LinSpace compute(double start, double end, int numberOfPoints, DFunction fun) {
+        return LinSpace.compute(start, end, numberOfPoints, fun);
+    }
+
     public static Abs abs() {
         return Abs.op;
     }

@@ -390,6 +390,11 @@ public final class LinSpace {
         return new LinSpace(start, end, numberOfPoints, null);
     }
 
+    public static LinSpace compute(double start, double end, int numberOfPoints, DFunction fun) {
+        LinSpace lsp = linspace(start, end, numberOfPoints).allocate();
+        return lsp.eval(fun);
+    }
+
     public static LinSpace centeredIntIndexed(double[] data) {
         final int length = data.length;
         if (length < 1) {
