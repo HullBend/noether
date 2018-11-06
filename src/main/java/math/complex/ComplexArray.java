@@ -147,6 +147,44 @@ public final class ComplexArray {
         return res;
     }
 
+    public ComplexArray fftshift() {
+        return shift(false);
+    }
+
+    public ComplexArray ifftshift() {
+        return shift(true);
+    }
+
+    private ComplexArray shift(boolean inverse) {
+        final int length = re.length;
+        int mid = -1;
+        double[] re_this = re;
+        double[] im_this = im;
+        double[] re_shift = new double[length];
+        double[] im_shift = new double[length];
+        if (length % 2 == 0) {
+            mid = (length / 2);
+            System.arraycopy(re_this, 0, re_shift, mid, mid);
+            System.arraycopy(re_this, mid, re_shift, 0, mid);
+            System.arraycopy(im_this, 0, im_shift, mid, mid);
+            System.arraycopy(im_this, mid, im_shift, 0, mid);
+        } else {
+            mid = (length - 1) / 2;
+            if (inverse) {
+                System.arraycopy(re_this, 0, re_shift, mid + 1, mid);
+                System.arraycopy(re_this, mid, re_shift, 0, mid + 1);
+                System.arraycopy(im_this, 0, im_shift, mid + 1, mid);
+                System.arraycopy(im_this, mid, im_shift, 0, mid + 1);
+            } else {
+                System.arraycopy(re_this, 0, re_shift, mid, mid + 1);
+                System.arraycopy(re_this, mid + 1, re_shift, 0, mid);
+                System.arraycopy(im_this, 0, im_shift, mid, mid + 1);
+                System.arraycopy(im_this, mid + 1, im_shift, 0, mid);
+            }
+        }
+        return new ComplexArray(re_shift, im_shift, false);
+    }
+
     public static IComplex dot(ComplexArray a, ComplexArray b) {
         if (a.length() != b.length()) {
             throw new IllegalArgumentException("Unequal dimensions: " + a.length() + " != " + b.length());
