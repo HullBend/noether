@@ -111,6 +111,11 @@ public abstract class OneDFun {
         public DFunction fun() {
             return fog;
         }
+
+        @Override
+        public String toString() {
+            return fog.toString(); 
+        }
     }
 
     /**
@@ -132,6 +137,11 @@ public abstract class OneDFun {
         @Override
         public double apply(double x) {
             return f.apply(g.apply(x));
+        }
+
+        @Override
+        public String toString() {
+            return "(" + f.toString() + ") o (" + g.toString() + ")";
         }
     }
 }
