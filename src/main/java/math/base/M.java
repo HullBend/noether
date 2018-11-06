@@ -65,6 +65,14 @@ public final class M {
         return new Const(c);
     }
 
+    public static AddConst addConstTo(double b) {
+        return new AddConst(b);
+    }
+
+    public static MulConst mulByConst(double a) {
+        return new MulConst(a);
+    }
+
     public static Gauss gauss(double alpha) {
         return new Gauss(alpha);
     }
