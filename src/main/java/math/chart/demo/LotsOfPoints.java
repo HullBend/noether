@@ -30,7 +30,7 @@ public class LotsOfPoints {
         final int size = 262144;
         final Random random = new Random();
 
-        LinSpace lsp = M.compute(0, size - 1, size, new DFunction() {
+        LinSpace lsp = M.compute(0.0, size - 1.0, size, new DFunction() {
             @Override
             public double apply(double x) {
                 return (60.0 + random.nextDouble()) * x;
