@@ -32,7 +32,7 @@ public class FFTGaussDemo1 {
 
         Graph graph = new Graph("Gauss-DFT (" + (N - 1) + " points in [" + lower + "," + upper + "])"); // .useAntialiasing();
 
-        LinSpace lsp1 = M.linspace(-10, 10, N);
+        LinSpace lsp1 = M.linspace(-10.0, 10.0, N);
         lsp1 = lsp1.sliceTo(N - 1);
         lsp1 = new Gauss(1).eval(lsp1);
 
