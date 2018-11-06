@@ -390,6 +390,32 @@ public final class LinSpace {
         return new LinSpace(start, end, numberOfPoints, null);
     }
 
+    public static LinSpace centeredIntIndexed(double[] data) {
+        final int length = data.length;
+        if (length < 1) {
+            throw new IllegalArgumentException("data.length must be strictly positive : 0");
+        }
+        if (length == 1) {
+            return new LinSpace(0.0, 0.0, 1, new double[] {data[0]});
+        }
+        double sym = (((double) length) - 1.0) / 2.0;
+        double start = (length % 2 != 0) ? -Math.floor(sym) : -Math.floor(sym) - 1.0;
+        double end = start + length - 1.0;
+        return new LinSpace(start, end, length, data.clone());
+    }
+
+    public static LinSpace centeredDoubleIndexed(double[] data) {
+        final int length = data.length;
+        if (length < 1) {
+            throw new IllegalArgumentException("data.length must be strictly positive : 0");
+        }
+        if (length == 1) {
+            return new LinSpace(0.0, 0.0, 1, new double[] {data[0]});
+        }
+        double sym = (((double) length) - 1.0) / 2.0;
+        return new LinSpace(-sym, sym, length, data.clone());
+    }
+
     public boolean hasValues() {
         return vec != null;
     }
