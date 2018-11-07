@@ -47,7 +47,7 @@ public abstract class OneDFun {
 
     // Override deriv1() for exact implementations
     public DFunction deriv1() {
-        return new Derivative1(fun());
+        return new NumericDeriv1(fun());
     }
 
     private static final class FirstDerivative extends OneDFun {
@@ -71,13 +71,13 @@ public abstract class OneDFun {
      * Scaling of {@code h} is taken into account by {@code h} being based upon
      * the absolute magnitude of {@code x}.
      */
-    private static final class Derivative1 implements DFunction {
+    private static final class NumericDeriv1 implements DFunction {
 
         private static final double DIFF_SCALE = 1.5805068191585264E-8;
 
         private final DFunction fun;
 
-        Derivative1(DFunction fun) {
+        NumericDeriv1(DFunction fun) {
             this.fun = fun;
         }
 
