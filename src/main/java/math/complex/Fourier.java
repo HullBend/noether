@@ -21,7 +21,7 @@ package math.complex;
  */
 public final class Fourier {
 
-    public static ComplexArray forwarDFT(double[] data) {
+    public static ComplexArray forwardDFT(double[] data) {
         final int N = data.length;
         if (N == 0) {
             return new ComplexArray(new double[] {}, new double[] {}, false);
@@ -44,6 +44,34 @@ public final class Fourier {
         double[] dataR = data.clone();
         bitReversalShuffle(dataR, null);
         double[] dataI = new double[N];
+        fourTermForward(dataR, dataI, N);
+        combineEvenOdd(dataR, dataI, N, false);
+        postProcess(dataR, dataI, N, false);
+        return new ComplexArray(dataR, dataI, false);
+    }
+
+    static ComplexArray forwardDFT(double[] real, double[] imag) {
+        final int N = real.length;
+        if (N == 0) {
+            return new ComplexArray(new double[] {}, new double[] {}, false);
+        }
+        if (N == 1) {
+            return new ComplexArray(real, imag, true);
+        }
+        if (N == 2) {
+            double[] dataR = real.clone();
+            double[] dataI = imag.clone();
+            double srcR0 = dataR[0];
+            double srcI0 = dataI[0];
+            dataR[0] = srcR0 + dataR[1];
+            dataR[1] = srcR0 - dataR[1];
+            dataI[0] = srcI0 + dataI[1];
+            dataI[1] = srcI0 - dataI[1];
+            return new ComplexArray(dataR, dataI, false);
+        }
+        double[] dataR = real.clone();
+        double[] dataI = imag.clone();
+        bitReversalShuffle(dataR, dataI);
         fourTermForward(dataR, dataI, N);
         combineEvenOdd(dataR, dataI, N, false);
         postProcess(dataR, dataI, N, false);
