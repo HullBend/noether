@@ -39,7 +39,7 @@ public final class Fourier {
             return new ComplexArray(dataR, new double[2], false);
         }
         if (!isPowerOfTwo(N)) {
-            return ComplexArray.naiveForwarDFT(data);
+            return Bluestein.forwardDFT(data, null);
         }
         double[] dataR = data.clone();
         bitReversalShuffle(dataR, null);
@@ -104,7 +104,7 @@ public final class Fourier {
             return new ComplexArray(dataR, dataI, false);
         }
         if (!isPowerOfTwo(N)) {
-            return ComplexArray.naiveInverseDFT(freqs);
+            return Bluestein.inverseDFT(freqs);
         }
         double[] dataR = freqs.re().clone();
         double[] dataI = freqs.im().clone();
