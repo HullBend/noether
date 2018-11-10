@@ -22,6 +22,9 @@
  */
 package math.complex;
 
+/**
+ * Bluestein chirp-z transform
+ */
 final class Bluestein {
 
     static ComplexArray forwardDFT(double[] data, double[] imag) {
