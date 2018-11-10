@@ -13,9 +13,13 @@
  */
 package math.complex;
 
+import java.util.Random;
+
 import org.junit.Assert;
 
 public final class TestUtils {
+
+    private static final Random rng = new Random();
 
     /**
      * Verifies that expected and actual are within delta, or are both NaN or
@@ -108,6 +112,55 @@ public final class TestUtils {
             double absError = Math.abs(expected) * relativeError;
             Assert.assertEquals(msg, expected, actual, absError);
         }
+    }
+
+    // log of root mean square error
+    public static double log10RmsError(ComplexArray expected, ComplexArray actual) {
+        double[] xreal = expected.re();
+        double[] ximag = expected.im();
+        double[] yreal = actual.re();
+        double[] yimag = actual.im();
+        int n = xreal.length;
+        double err = Math.pow(10.0, -99.0 * 2.0);
+        for (int i = 0; i < n; ++i) {
+            double real = xreal[i] - yreal[i];
+            double imag = ximag[i] - yimag[i];
+            err += real * real + imag * imag;
+        }
+        // calculate root mean square (RMS) error
+        err = Math.sqrt(err / Math.max(n, 1));
+        return Math.log10(err);
+    }
+
+    // each individual double lies in [-1, 1)
+    public static double[] randomData(int length) {
+        double[] rand = new double[length];
+        for (int i = 0; i < rand.length; ++i) {
+            rand[i] = (rng.nextDouble() * 2.0) - 1.0;
+        }
+        return rand;
+    }
+
+    // range is [3, 8193]
+    public static int randLengthOdd() {
+        int len = -1;
+        do {
+            len = rng.nextInt(8194);
+        } while (len <= 2 || (len % 2 == 0));
+        return len;
+    }
+
+    // range is [6, 8194]
+    public static int randLengthEvenNotPowerOf2() {
+        int len = -1;
+        do {
+            len = rng.nextInt(8195);
+        } while (len <= 2 || (len % 2 != 0) || (isPowerOfTwo(len)));
+        return len;
+    }
+
+    public static boolean isPowerOfTwo(int n) {
+        return (n > 0) && ((n & (n - 1)) == 0);
     }
 
     private TestUtils() {
