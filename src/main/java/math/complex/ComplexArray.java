@@ -26,7 +26,7 @@ public final class ComplexArray {
 
     /** The IEEE 754 machine epsilon from Cephes: {@code (2^-53)} */
     private static final double MACH_EPS = 1.11022302462515654042e-16;
-    private static final double TOL = 5.0 * MACH_EPS;
+    static final double TOL = 5.0 * MACH_EPS;
     private static final double TWO_PI = 2.0 * Math.PI;
 
     private final double[] re;

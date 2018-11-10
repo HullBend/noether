@@ -224,11 +224,11 @@ public final class Fourier {
         double scaleFactor = normalize ? (1.0 / n) : 1.0;
         for (int i = 0; i < n; ++i) {
             double re_i = dataR[i] * scaleFactor;
-            dataR[i] = (Math.abs(re_i) <= TOL) ? 0.0 : re_i;
+            dataR[i] = (Math.abs(re_i) <= ComplexArray.TOL) ? 0.0 : re_i;
         }
         for (int i = 0; i < n; ++i) {
             double im_i = dataI[i] * scaleFactor;
-            dataI[i] = (Math.abs(im_i) <= TOL) ? 0.0 : im_i;
+            dataI[i] = (Math.abs(im_i) <= ComplexArray.TOL) ? 0.0 : im_i;
         }
     }
 
@@ -275,10 +275,6 @@ public final class Fourier {
     private static boolean isPowerOfTwo(int n) {
         return (n > 0) && ((n & (n - 1)) == 0);
     }
-
-    /** The IEEE 754 machine epsilon from Cephes: {@code (2^-53)} */
-    private static final double MACH_EPS = 1.11022302462515654042e-16;
-    private static final double TOL = 5.0 * MACH_EPS;
 
     /**
      * {@code W_SUB_N_R[i]} is the real part of {@code exp(- 2 * i * pi / n)}:

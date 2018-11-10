@@ -24,10 +24,6 @@ package math.complex;
 
 final class Bluestein {
 
-    /** The IEEE 754 machine epsilon from Cephes: {@code (2^-53)} */
-    private static final double MACH_EPS = 1.11022302462515654042e-16;
-    private static final double TOL = 5.0 * MACH_EPS;
-
     static ComplexArray forwardDFT(double[] data, double[] imag) {
         // find a power of 2 convolution length m such that m >= n * 2 + 1
         int n = data.length;
@@ -85,8 +81,8 @@ final class Bluestein {
             double c_im_i = c_im[i];
             double re_i = c_re_i * cos_i + c_im_i * sin_i;
             double im_i = -c_re_i * sin_i + c_im_i * cos_i;
-            re[i] = (Math.abs(re_i) <= TOL) ? 0.0 : re_i;
-            im[i] = (Math.abs(im_i) <= TOL) ? 0.0 : im_i;
+            re[i] = (Math.abs(re_i) <= ComplexArray.TOL) ? 0.0 : re_i;
+            im[i] = (Math.abs(im_i) <= ComplexArray.TOL) ? 0.0 : im_i;
         }
 
         return new ComplexArray(re, im, false);
@@ -100,8 +96,8 @@ final class Bluestein {
         for (int i = 0; i < n; ++i) {
             double re_i = re[i] / n;
             double im_i = im[i] / n;
-            re[i] = (Math.abs(re_i) <= TOL) ? 0.0 : re_i;
-            im[i] = (Math.abs(im_i) <= TOL) ? 0.0 : im_i;
+            re[i] = (Math.abs(re_i) <= ComplexArray.TOL) ? 0.0 : re_i;
+            im[i] = (Math.abs(im_i) <= ComplexArray.TOL) ? 0.0 : im_i;
         }
         for (int i = 1; i <= n / 2; ++i) {
             double re_tmp = re[n - i];
