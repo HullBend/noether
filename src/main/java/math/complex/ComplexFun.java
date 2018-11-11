@@ -196,6 +196,18 @@ public final class ComplexFun {
         }
     }
 
+    public static IComplex fromPolar(double radius, double phi) {
+        return fromPolar(radius, phi, false);
+    }
+
+    public static IComplex fromPolar(double radius, double phi, boolean mutable) {
+        if (mutable) {
+            return new MComplex(radius * Math.cos(phi), radius * Math.sin(phi));
+        } else {
+            return new Complex(radius * Math.cos(phi), radius * Math.sin(phi));
+        }
+    }
+
     private ComplexFun() {
         throw new AssertionError();
     }
