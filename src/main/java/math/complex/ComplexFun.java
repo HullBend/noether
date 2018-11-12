@@ -201,6 +201,9 @@ public final class ComplexFun {
     }
 
     public static IComplex fromPolar(double radius, double phi, boolean mutable) {
+        if (radius < 0.0) {
+            throw new IllegalArgumentException("radius must be positive : " + radius);
+        }
         if (mutable) {
             return new MComplex(radius * Math.cos(phi), radius * Math.sin(phi));
         } else {
