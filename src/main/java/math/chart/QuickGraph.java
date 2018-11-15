@@ -28,7 +28,6 @@ import javax.swing.JFrame;
 public class QuickGraph {
 
     private final JFrame frame = createFrame("");
-    private Chart chart;
 
     public QuickGraph(String title, double[] axis, double[] values) {
         Trace trace = setup(title);
@@ -50,7 +49,7 @@ public class QuickGraph {
         if (title != null) {
             frame.setTitle(title);
         }
-        chart = new Chart();
+        Chart chart = new Chart();
         frame.getContentPane().add(chart);
         Trace trace = new Trace("values");
         trace.setColor(Shade.BLUE.getColor());
