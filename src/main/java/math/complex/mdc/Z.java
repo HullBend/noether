@@ -19,7 +19,7 @@ package math.complex.mdc;
  * <p>
  *
  * Since objects of class Z are mutable, the use of the assignment operator "="
- * with these objects is deprecated. Use Eq.
+ * with these objects is deprecated. Use {@code eq}.
  * <p>
  *
  * The functions are reasonably resistant to overflow and underflow. But the
@@ -94,7 +94,7 @@ final class Z {
     }
 
     /**
-     * Tests two Z'z for equality.
+     * Tests two Z's for equality.
      * 
      * @param z1
      *            a Z

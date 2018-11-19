@@ -6,7 +6,7 @@ package math.complex.mdc;
  * X such that
  * 
  * <pre>
-*      D = X<sup>-1</sup> AX
+ *      D = X<sup>-1</sup> AX
  * </pre>
  * 
  * is diagonal. The columns of X are eigenvectors of A corresponding to the

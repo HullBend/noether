@@ -5,7 +5,7 @@ package math.complex.mdc;
  * square matrix A, there is a unitary matrix U such that
  * 
  * <pre>
-*      T = U^H AU
+ *      T = U^H AU
  * </pre>
  * 
  * is upper triangular. Schur represents T and U as Zmats.
@@ -133,7 +133,7 @@ final class Schur {
      * is a unitary matrix U such that
      * 
      * <pre>
-    *      H = U^H AU
+     *      H = U^H AU
      * </pre>
      * 
      * is upper Hessenberg. Zhess represents U and H as Zmats.

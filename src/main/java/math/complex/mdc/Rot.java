@@ -5,8 +5,8 @@ package math.complex.mdc;
  * are x and y, there is a unitary matrix P such that
  * 
  * <pre>
-*      P|x| =  |   c      s||x| = |z|
-*       |y|    |-conj(s)  c||y|   |0|
+ *      P|x| =  |   c      s||x| = |z|
+ *       |y|    |-conj(s)  c||y|   |0|
  * </pre>
  * 
  * The number c, which is always real, is the cosine of the rotation. The number
@@ -37,8 +37,8 @@ final class Rot {
      * Given a real 2-vectc, genc generates a real plane rotation P such that
      * 
      * <pre>
-    *      P|x| =  | c  s||x| = |z|
-    *       |y|    |-s  c||y|   |0|
+     *      P|x| =  | c  s||x| = |z|
+     *       |y|    |-s  c||y|   |0|
      * </pre>
      * 
      * @param x

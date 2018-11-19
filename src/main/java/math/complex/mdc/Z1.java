@@ -16,7 +16,7 @@ final class Z1 {
     final double im[];
 
     /**
-     * Creates a Z1 initializes to zero.
+     * Creates a Z1 initialized to zero.
      * 
      * @param n
      *            a positive integer
