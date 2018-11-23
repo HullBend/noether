@@ -30,6 +30,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.github.hullbend</groupId>
+			<artifactId>mt-java</artifactId>
+			<version>1.0.4</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
 			<groupId>net.sf.jchart2d</groupId>
 			<artifactId>jchart2d</artifactId>
 			<version>3.3.2</version>
