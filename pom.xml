@@ -30,12 +30,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.github.hullbend</groupId>
-			<artifactId>mt-java</artifactId>
-			<version>1.0.4</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>net.sf.jchart2d</groupId>
 			<artifactId>jchart2d</artifactId>
 			<version>3.3.2</version>
@@ -57,7 +51,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.8.0</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
@@ -65,13 +59,8 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.2</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.4</version>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -84,7 +73,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.3</version>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
