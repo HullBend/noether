@@ -7,7 +7,8 @@ package ch.akuhn.matrix;
  */
 public class DenseVector extends Vector {
 
-    private double unit = 0;
+    private double unit = 0.0;
+
     /* package */double[] values;
 
     protected DenseVector(double[] values) {
@@ -25,9 +26,10 @@ public class DenseVector extends Vector {
      * @return the cosine
      */
     public double cosine(DenseVector other) {
-        double sum = 0;
-        for (int n = 0; n < values.length; n++)
+        double sum = 0.0;
+        for (int n = 0; n < values.length; n++) {
             sum += values[n] * other.values[n];
+        }
         return sum / (this.norm() * other.norm());
     }
 
@@ -38,13 +40,16 @@ public class DenseVector extends Vector {
 
     @Override
     public double norm() {
-        if (unit != 0)
+        if (unit != 0.0) {
             return unit; // FIXME should purge cache on edit
-        double qsum = 0;
-        for (final double value : values)
+        }
+        double qsum = 0.0;
+        for (double value : values) {
             qsum += value * value;
-        if (qsum == 0)
-            qsum = 1;
+        }
+        if (qsum == 0.0) {
+            qsum = 1.0;
+        }
         return unit = Math.sqrt(qsum);
     }
 
@@ -60,27 +65,31 @@ public class DenseVector extends Vector {
 
     @Override
     public Vector times(double scalar) {
-        final double[] times = new double[values.length];
-        for (int n = 0; n < values.length; n++)
+        double[] times = new double[values.length];
+        for (int n = 0; n < values.length; n++) {
             times[n] = values[n] * scalar;
+        }
         return new DenseVector(times);
     }
 
     @Override
     public Vector timesEquals(double scalar) {
-        for (int n = 0; n < values.length; n++)
+        for (int n = 0; n < values.length; n++) {
             values[n] *= scalar;
+        }
         return this;
     }
 
     @Override
     public boolean equals(Vector v, double epsilon) {
-        if (size() != v.size())
+        if (size() != v.size()) {
             return false;
-        final DenseVector d = (DenseVector) v;
+        }
+        DenseVector d = (DenseVector) v;
         for (int i = 0; i < values.length; i++) {
-            if ((values[i] - d.values[i]) > epsilon)
+            if ((values[i] - d.values[i]) > epsilon) {
                 return false;
+            }
         }
         return true;
     }
