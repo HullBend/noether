@@ -58,8 +58,9 @@ public abstract class Matrix {
 
                     @Override
                     public Vector next() {
-                        if (!hasNext())
+                        if (!hasNext()) {
                             throw new NoSuchElementException();
+                        }
                         return new Vec(count++, isRow);
                     }
 
@@ -136,7 +137,6 @@ public abstract class Matrix {
      * 
      * @param appendable
      * @throws IOException
-     * @see "http://tedlab.mit.edu/~dr/svdlibc/SVD_F_ST.html"
      */
     public void storeSparseOn(Appendable appendable) throws IOException {
         // this stores the transposed matrix, but as we will transpose it again
@@ -144,9 +144,9 @@ public abstract class Matrix {
         appendable.append(this.columnCount() + " ");
         appendable.append(this.rowCount() + " ");
         appendable.append(this.used() + "\r");
-        for (final Vector row : rows()) {
+        for (Vector row : rows()) {
             appendable.append(row.used() + "\r");
-            for (final Entry each : row.entries()) {
+            for (Entry each : row.entries()) {
                 appendable.append(each.index + " " + each.value + " ");
             }
             appendable.append("\r");
@@ -161,7 +161,7 @@ public abstract class Matrix {
      * @throws IOException
      */
     public void storeSparseOn(String fname) throws IOException {
-        final FileWriter fw = new FileWriter(new File(fname));
+        FileWriter fw = new FileWriter(new File(fname));
         storeSparseOn(fw);
         fw.close();
     }
@@ -192,7 +192,7 @@ public abstract class Matrix {
      * @return the array representation
      */
     public double[][] asArray() {
-        final double[][] result = new double[rowCount()][columnCount()];
+        double[][] result = new double[rowCount()][columnCount()];
         for (int x = 0; x < result.length; x++) {
             for (int y = 0; y < result[x].length; y++) {
                 result[x][y] = get(x, y);
@@ -211,7 +211,7 @@ public abstract class Matrix {
         return ((Vec) vec).index0;
     }
 
-    private class Vec extends Vector {
+    private final class Vec extends Vector {
 
         int index0;
         private boolean isRow;
@@ -240,17 +240,17 @@ public abstract class Matrix {
 
         @Override
         public boolean equals(Vector v, double epsilon) {
-            throw new Error("Not yet implemented");
+            throw new UnsupportedOperationException("Not yet implemented");
         }
 
         @Override
         public Vector times(double scalar) {
-            throw new Error("Not yet implemented");
+            throw new UnsupportedOperationException("Not yet implemented");
         }
 
         @Override
         public Vector timesEquals(double scalar) {
-            throw new Error("Not yet implemented");
+            throw new UnsupportedOperationException("Not yet implemented");
         }
     }
 
@@ -265,10 +265,11 @@ public abstract class Matrix {
         if (x.size() != columnCount()) {
             throw new IllegalArgumentException("Vector.size() : " + x.size());
         }
-        final Vector y = Vector.dense(this.rowCount());
+        Vector y = Vector.dense(this.rowCount());
         int i = 0;
-        for (final Vector row : rows())
+        for (Vector row : rows()) {
             y.put(i++, row.dot(x));
+        }
         return y;
     }
 
@@ -279,10 +280,11 @@ public abstract class Matrix {
      * @return the result
      */
     public Vector transposeMultiply(Vector x) {
-        final Vector y = Vector.dense(this.columnCount());
+        Vector y = Vector.dense(this.columnCount());
         int i = 0;
-        for (final Vector row : rows())
+        for (Vector row : rows()) {
             row.scaleAndAddTo(x.get(i++), y);
+        }
         return y;
     }
 
@@ -307,9 +309,10 @@ public abstract class Matrix {
      * @return the matrix
      */
     public static Matrix from(int n, int m, double... values) {
-        final double[][] data = new double[n][];
-        for (int i = 0; i < n; i++)
+        double[][] data = new double[n][];
+        for (int i = 0; i < n; i++) {
             data[i] = Arrays.copyOfRange(values, i * m, (i + 1) * m);
+        }
         return new DenseMatrix(data);
     }
 
@@ -332,15 +335,15 @@ public abstract class Matrix {
     }
 
     /**
-     * Get in col-major format
+     * Get in column-major format
      * 
      * @return the data in column major format
      */
     public double[] asColumnMajorArray() {
-        final double[] data = new double[columnCount() * rowCount()];
-        final int n = columnCount();
+        double[] data = new double[columnCount() * rowCount()];
+        int n = columnCount();
         int i = 0;
-        for (final Vector row : rows()) {
+        for (Vector row : rows()) {
             for (final Entry each : row.entries()) {
                 data[i + each.index * n] = each.value;
             }
@@ -378,7 +381,7 @@ public abstract class Matrix {
      * @return mean value of matrix
      */
     public double mean() {
-        final double[][] values = unwrap();
+        double[][] values = unwrap();
         return Util.sum(values) / Util.count(values);
     }
 
@@ -386,17 +389,18 @@ public abstract class Matrix {
      * @return unwrapped matrix
      */
     public double[][] unwrap() {
-        throw new IllegalStateException("cannot unwrap instance of " + this.getClass().getSimpleName());
+        throw new IllegalStateException("cannot unwrap instance of " + this.getClass().getName());
     }
 
     /**
      * @return mean of each row
      */
     public double[] rowwiseMean() {
-        final double[] mean = new double[rowCount()];
+        double[] mean = new double[rowCount()];
         int i = 0;
-        for (final Vector row : rows())
+        for (Vector row : rows()) {
             mean[i++] = row.mean();
+        }
         return mean;
     }
 
@@ -423,11 +427,11 @@ public abstract class Matrix {
 
     @Override
     public String toString() {
-        final Writer sw = new StringWriter();
-        final PrintWriter writer = new PrintWriter(sw);
+        Writer sw = new StringWriter();
+        PrintWriter writer = new PrintWriter(sw);
         writer.println("NRows = " + rowCount());
         writer.println("NCols = " + columnCount());
-        final int maxPrint = Math.min(rowCount() * columnCount(), MAX_PRINT);
+        int maxPrint = Math.min(rowCount() * columnCount(), MAX_PRINT);
         int i;
         for (i = 0; i < maxPrint; i++) {
             final int row = i / columnCount();
