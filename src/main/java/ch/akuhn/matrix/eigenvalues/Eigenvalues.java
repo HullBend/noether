@@ -1,6 +1,6 @@
 package ch.akuhn.matrix.eigenvalues;
 
-import ch.akuhn.matrix.Matrix;
+import ch.akuhn.matrix.KuhnMatrix;
 import ch.akuhn.matrix.Vector;
 
 /**
@@ -41,7 +41,7 @@ public class Eigenvalues {
      * @param A
      * @return the object to compute the eigen decomposition
      */
-    public static Eigenvalues of(Matrix A) {
+    public static Eigenvalues of(KuhnMatrix A) {
         if (A.columnCount() == 0) {
             Eigenvalues eigen = new Eigenvalues(0);
             eigen.value = new double[0];

@@ -52,7 +52,7 @@ public class LUDecomposition implements java.io.Serializable {
      * @param A
      *            Rectangular matrix
      */
-    public LUDecomposition(Matrix A) {
+    public LUDecomposition(JamaMatrix A) {
         // Use a "left-looking", dot-product, Crout/Doolittle algorithm
         LU = A.getArrayCopy();
         m = A.getRowDimension();
@@ -137,9 +137,8 @@ public class LUDecomposition implements java.io.Serializable {
      *            Rectangular matrix
      * @param linpackFlag
      *            Use Gaussian elimination. Actual value ignored.
-     * @return Structure to access L, U and piv.
      */
-    public LUDecomposition(Matrix A, int linpackFlag) {
+    public LUDecomposition(JamaMatrix A, int linpackFlag) {
         // Initialize
         LU = A.getArrayCopy();
         m = A.getRowDimension();
@@ -208,8 +207,8 @@ public class LUDecomposition implements java.io.Serializable {
      * 
      * @return L
      */
-    public Matrix getL() {
-        Matrix X = new Matrix(m, n);
+    public JamaMatrix getL() {
+        JamaMatrix X = new JamaMatrix(m, n);
         double[][] L = X.getArray();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -230,8 +229,8 @@ public class LUDecomposition implements java.io.Serializable {
      * 
      * @return U
      */
-    public Matrix getU() {
-        Matrix X = new Matrix(n, n);
+    public JamaMatrix getU() {
+        JamaMatrix X = new JamaMatrix(n, n);
         double[][] U = X.getArray();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -300,7 +299,7 @@ public class LUDecomposition implements java.io.Serializable {
      * @exception RuntimeException
      *                Matrix is singular.
      */
-    public Matrix solve(Matrix B) {
+    public JamaMatrix solve(JamaMatrix B) {
         if (B.getRowDimension() != m) {
             throw new IllegalArgumentException("Matrix row dimensions must agree.");
         }
@@ -310,7 +309,7 @@ public class LUDecomposition implements java.io.Serializable {
 
         // Copy right hand side with pivoting
         int nx = B.getColumnDimension();
-        Matrix Xmat = B.getMatrix(piv, 0, nx - 1);
+        JamaMatrix Xmat = B.getMatrix(piv, 0, nx - 1);
         double[][] X = Xmat.getArray();
 
         // Solve L*Y = B(piv,:)

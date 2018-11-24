@@ -3,7 +3,7 @@ package ch.akuhn.matrix.eigenvalues;
 import java.util.Arrays;
 import java.util.Random;
 
-import ch.akuhn.matrix.Matrix;
+import ch.akuhn.matrix.KuhnMatrix;
 import ch.akuhn.matrix.SparseMatrix;
 import ch.akuhn.matrix.Vector;
 
@@ -29,7 +29,7 @@ public class SingularValues {
      */
     public Vector[] vectorRight;
 
-    final Matrix A;
+    final KuhnMatrix A;
     private int nev;
 
     /**
@@ -38,7 +38,7 @@ public class SingularValues {
      * @param A
      * @param nev
      */
-    public SingularValues(Matrix A, int nev) {
+    public SingularValues(KuhnMatrix A, int nev) {
         this.A = A;
         this.nev = nev;
     }
@@ -75,7 +75,7 @@ public class SingularValues {
      * @param args ignored
      */
     public static void main(String... args) {
-        SparseMatrix A = Matrix.sparse(400, 5000);
+        SparseMatrix A = KuhnMatrix.sparse(400, 5000);
         Random rand = new Random(1);
         for (int i = 0; i < A.rowCount(); i++) {
             for (int j = 0; j < A.columnCount(); j++) {

@@ -13,7 +13,7 @@ import ch.akuhn.matrix.Vector.Entry;
  * 
  * @author Adrian Kuhn
  */
-public class SparseMatrix extends Matrix {
+public class SparseMatrix extends KuhnMatrix {
 
     private static final Random random = new Random();
 
@@ -260,7 +260,7 @@ public class SparseMatrix extends Matrix {
     }
 
     @Override
-    public Matrix newInstance(int rows, int cols) {
+    public KuhnMatrix newInstance(int rows, int cols) {
         return new SparseMatrix(rows, cols);
     }
 }

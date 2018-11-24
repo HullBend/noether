@@ -54,7 +54,7 @@ public class SingularValueDecomposition implements java.io.Serializable {
      * @param arg
      *            Rectangular matrix
      */
-    public SingularValueDecomposition(Matrix arg) {
+    public SingularValueDecomposition(JamaMatrix arg) {
 
         // Derived from LINPACK code.
         // Initialize
@@ -469,8 +469,8 @@ public class SingularValueDecomposition implements java.io.Serializable {
      * 
      * @return U
      */
-    public Matrix getU() {
-        return new Matrix(U, m, Math.min(m + 1, n));
+    public JamaMatrix getU() {
+        return new JamaMatrix(U, m, Math.min(m + 1, n));
     }
 
     /**
@@ -478,8 +478,8 @@ public class SingularValueDecomposition implements java.io.Serializable {
      * 
      * @return V
      */
-    public Matrix getV() {
-        return new Matrix(V, n, n);
+    public JamaMatrix getV() {
+        return new JamaMatrix(V, n, n);
     }
 
     /**
@@ -496,8 +496,8 @@ public class SingularValueDecomposition implements java.io.Serializable {
      * 
      * @return S
      */
-    public Matrix getS() {
-        Matrix X = new Matrix(n, n);
+    public JamaMatrix getS() {
+        JamaMatrix X = new JamaMatrix(n, n);
         double[][] S = X.getArray();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {

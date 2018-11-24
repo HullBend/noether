@@ -8,7 +8,7 @@ import java.util.Iterator;
  * 
  * @author Adrian Kuhn
  */
-public class DenseMatrix extends Matrix {
+public class DenseMatrix extends KuhnMatrix {
 
     protected double[][] values;
 
@@ -104,7 +104,7 @@ public class DenseMatrix extends Matrix {
 
     @Override
     public int used() {
-    	throw new IllegalStateException();
+        throw new IllegalStateException();
     }
 
     @Override
@@ -133,7 +133,7 @@ public class DenseMatrix extends Matrix {
     }
 
     @Override
-    public Matrix newInstance(int rows, int cols) {
+    public KuhnMatrix newInstance(int rows, int cols) {
         return new DenseMatrix(rows, cols);
     }
 }

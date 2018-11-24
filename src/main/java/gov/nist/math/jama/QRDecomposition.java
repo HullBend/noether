@@ -50,7 +50,7 @@ public class QRDecomposition implements java.io.Serializable {
      * @param A
      *            Rectangular matrix
      */
-    public QRDecomposition(Matrix A) {
+    public QRDecomposition(JamaMatrix A) {
         // Initialize
         QR = A.getArrayCopy();
         m = A.getRowDimension();
@@ -113,8 +113,8 @@ public class QRDecomposition implements java.io.Serializable {
      * 
      * @return Lower trapezoidal matrix whose columns define the reflections
      */
-    public Matrix getH() {
-        Matrix X = new Matrix(m, n);
+    public JamaMatrix getH() {
+        JamaMatrix X = new JamaMatrix(m, n);
         double[][] H = X.getArray();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -133,8 +133,8 @@ public class QRDecomposition implements java.io.Serializable {
      * 
      * @return R
      */
-    public Matrix getR() {
-        Matrix X = new Matrix(n, n);
+    public JamaMatrix getR() {
+        JamaMatrix X = new JamaMatrix(n, n);
         double[][] R = X.getArray();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -155,8 +155,8 @@ public class QRDecomposition implements java.io.Serializable {
      * 
      * @return Q
      */
-    public Matrix getQ() {
-        Matrix X = new Matrix(m, n);
+    public JamaMatrix getQ() {
+        JamaMatrix X = new JamaMatrix(m, n);
         double[][] Q = X.getArray();
         for (int k = n - 1; k >= 0; k--) {
             for (int i = 0; i < m; i++) {
@@ -190,7 +190,7 @@ public class QRDecomposition implements java.io.Serializable {
      * @exception RuntimeException
      *                Matrix is rank deficient.
      */
-    public Matrix solve(Matrix B) {
+    public JamaMatrix solve(JamaMatrix B) {
         if (B.getRowDimension() != m) {
             throw new IllegalArgumentException("Matrix row dimensions must agree.");
         }
@@ -226,7 +226,7 @@ public class QRDecomposition implements java.io.Serializable {
                 }
             }
         }
-        return (new Matrix(X, n, nx).getMatrix(0, n - 1, 0, nx - 1));
+        return (new JamaMatrix(X, n, nx).getMatrix(0, n - 1, 0, nx - 1));
     }
 
     private static final long serialVersionUID = 1;

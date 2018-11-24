@@ -5,7 +5,7 @@ import java.util.Arrays;
 import com.github.fommil.netlib.LAPACK;
 import org.netlib.util.intW;
 
-import ch.akuhn.matrix.Matrix;
+import ch.akuhn.matrix.KuhnMatrix;
 import ch.akuhn.matrix.Vector;
 
 /**
@@ -27,14 +27,14 @@ public class AllEigenvalues extends Eigenvalues {
     private static final boolean r = false;
 
     private final LAPACK lapack = LAPACK.getInstance();
-    private final Matrix A;
+    private final KuhnMatrix A;
 
     /**
      * Construct with the given matrix
      *
      * @param A
      */
-    public AllEigenvalues(Matrix A) {
+    public AllEigenvalues(KuhnMatrix A) {
         super(A.columnCount());
         if (!A.isSquare()) {
             throw new IllegalArgumentException("A is not square");

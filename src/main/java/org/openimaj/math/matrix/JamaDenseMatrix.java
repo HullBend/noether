@@ -29,19 +29,21 @@
  */
 package org.openimaj.math.matrix;
 
-import gov.nist.math.jama.Matrix;
+import gov.nist.math.jama.JamaMatrix;
 
 import java.util.Arrays;
+
+import ch.akuhn.matrix.KuhnMatrix;
 
 /**
  * Dense matrix wrapper for a JAMA matrix.
  *
  * @author Jonathon Hare (jsh2@ecs.soton.ac.uk)
  */
-public class JamaDenseMatrix extends ch.akuhn.matrix.Matrix {
+public class JamaDenseMatrix extends KuhnMatrix {
 
     /** The underlying matrix */
-    public Matrix matrix;
+    public JamaMatrix matrix;
 
     /**
      * Construct with matrix. The matrix is retained.
@@ -49,7 +51,7 @@ public class JamaDenseMatrix extends ch.akuhn.matrix.Matrix {
      * @param matrix
      *            The matrix.
      */
-    public JamaDenseMatrix(Matrix matrix) {
+    public JamaDenseMatrix(JamaMatrix matrix) {
         this.matrix = matrix;
     }
 
@@ -60,7 +62,7 @@ public class JamaDenseMatrix extends ch.akuhn.matrix.Matrix {
      *            The data.
      */
     public JamaDenseMatrix(double[][] values) {
-        this.matrix = new Matrix(values);
+        this.matrix = new JamaMatrix(values);
         this.assertInvariant();
     }
 
@@ -85,7 +87,7 @@ public class JamaDenseMatrix extends ch.akuhn.matrix.Matrix {
      *            number of columns.
      */
     public JamaDenseMatrix(int rows, int columns) {
-        this.matrix = new Matrix(rows, columns);
+        this.matrix = new JamaMatrix(rows, columns);
     }
 
     @Override
@@ -149,7 +151,7 @@ public class JamaDenseMatrix extends ch.akuhn.matrix.Matrix {
     /**
      * @return the wrapped JAMA matrix
      */
-    public Matrix getMatrix() {
+    public JamaMatrix getMatrix() {
         return matrix;
     }
 
@@ -159,7 +161,7 @@ public class JamaDenseMatrix extends ch.akuhn.matrix.Matrix {
     }
 
     @Override
-    public ch.akuhn.matrix.Matrix newInstance(int rows, int cols) {
+    public KuhnMatrix newInstance(int rows, int cols) {
         return new JamaDenseMatrix(rows, cols);
     }
 }

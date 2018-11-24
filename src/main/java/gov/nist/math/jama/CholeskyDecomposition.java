@@ -48,7 +48,7 @@ public class CholeskyDecomposition implements java.io.Serializable {
      * @param arg
      *            Square, symmetric matrix.
      */
-    public CholeskyDecomposition(Matrix arg) {
+    public CholeskyDecomposition(JamaMatrix arg) {
         // Initialize
         double[][] A = arg.getArray();
         n = arg.getRowDimension();
@@ -159,8 +159,8 @@ public class CholeskyDecomposition implements java.io.Serializable {
      * 
      * @return L
      */
-    public Matrix getL() {
-        return new Matrix(L, n, n);
+    public JamaMatrix getL() {
+        return new JamaMatrix(L, n, n);
     }
 
     /**
@@ -174,7 +174,7 @@ public class CholeskyDecomposition implements java.io.Serializable {
      * @exception RuntimeException
      *                Matrix is not symmetric positive definite.
      */
-    public Matrix solve(Matrix B) {
+    public JamaMatrix solve(JamaMatrix B) {
         if (B.getRowDimension() != n) {
             throw new IllegalArgumentException("Matrix row dimensions must agree.");
         }
@@ -206,7 +206,7 @@ public class CholeskyDecomposition implements java.io.Serializable {
             }
         }
 
-        return new Matrix(X, n, nx);
+        return new JamaMatrix(X, n, nx);
     }
 
     private static final long serialVersionUID = 1;

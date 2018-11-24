@@ -6,7 +6,7 @@ import com.github.fommil.netlib.ARPACK;
 import org.netlib.util.doubleW;
 import org.netlib.util.intW;
 
-import ch.akuhn.matrix.Matrix;
+import ch.akuhn.matrix.KuhnMatrix;
 import ch.akuhn.matrix.Vector;
 
 /**
@@ -58,7 +58,7 @@ public abstract class FewEigenvalues extends Eigenvalues {
 
     private Which which;
 
-    public static FewEigenvalues of(final Matrix matrix) {
+    public static FewEigenvalues of(final KuhnMatrix matrix) {
         if (!matrix.isSquare()) {
             throw new IllegalArgumentException("matrix is not square");
         }

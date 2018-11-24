@@ -29,14 +29,15 @@
  */
 package org.openimaj.math.matrix;
 
-import gov.nist.math.jama.Matrix;
+import gov.nist.math.jama.JamaMatrix;
+import ch.akuhn.matrix.KuhnMatrix;
 import ch.akuhn.matrix.Vector;
 import ch.akuhn.matrix.eigenvalues.SingularValues;
 
 /**
  * Thin SVD based on Adrian Kuhn's wrapper around ARPACK. This can scale to
  * really large matrices (bigger than RAM), given an implementation of
- * {@link ch.akuhn.matrix.Matrix} that is backed by disk.
+ * {@link ch.akuhn.matrix.KuhnMatrix} that is backed by disk.
  * <p>
  * Note that the current version of (Java) ARPACK is not thread-safe. Allowances
  * have been made in this implementation to synchronize the call to
@@ -48,11 +49,11 @@ import ch.akuhn.matrix.eigenvalues.SingularValues;
  */
 public class ThinSingularValueDecomposition {
     /** The U matrix */
-    public Matrix U;
+    public JamaMatrix U;
     /** The singular values */
     public double[] S;
     /** The transpose of the V matrix */
-    public Matrix Vt;
+    public JamaMatrix Vt;
 
     /**
      * Perform thin SVD on matrix, calculating at most ndims dimensions.
@@ -63,7 +64,7 @@ public class ThinSingularValueDecomposition {
      *            the number of singular values/vectors to calculate; actual
      *            number may be less.
      */
-    public ThinSingularValueDecomposition(Matrix matrix, int ndims) {
+    public ThinSingularValueDecomposition(JamaMatrix matrix, int ndims) {
         this(new JamaDenseMatrix(matrix), ndims);
     }
 
@@ -76,7 +77,7 @@ public class ThinSingularValueDecomposition {
      *            the number of singular values/vectors to calculate; actual
      *            number may be less.
      */
-    public ThinSingularValueDecomposition(ch.akuhn.matrix.Matrix matrix, int ndims) {
+    public ThinSingularValueDecomposition(KuhnMatrix matrix, int ndims) {
         // FIXME: I'm (Jon) not sure why this was added, but it causes problems
         // with big matrices... commented it out for the time being
         // if (ndims > Math.min(matrix.rowCount(), matrix.columnCount())) {
@@ -121,7 +122,7 @@ public class ThinSingularValueDecomposition {
         return vector;
     }
 
-    protected static Matrix vectorArrayToMatrix(Vector[] vectors, boolean rows) {
+    protected static JamaMatrix vectorArrayToMatrix(Vector[] vectors, boolean rows) {
         final int m = vectors.length;
 
         final double[][] data = new double[m][];
@@ -130,7 +131,7 @@ public class ThinSingularValueDecomposition {
             data[m - i - 1] = vectors[i].unwrap();
         }
 
-        Matrix mat = new Matrix(data);
+        JamaMatrix mat = new JamaMatrix(data);
 
         if (!rows) {
             mat = mat.transpose();
@@ -141,8 +142,8 @@ public class ThinSingularValueDecomposition {
     /**
      * @return The S matrix
      */
-    public Matrix getSmatrix() {
-        Matrix Smat = new Matrix(S.length, S.length);
+    public JamaMatrix getSmatrix() {
+        JamaMatrix Smat = new JamaMatrix(S.length, S.length);
         for (int r = 0; r < S.length; r++) {
             Smat.set(r, r, S[r]);
         }
@@ -152,8 +153,8 @@ public class ThinSingularValueDecomposition {
     /**
      * @return The sqrt of the singular vals as a matrix.
      */
-    public Matrix getSmatrixSqrt() {
-        Matrix Smat = new Matrix(S.length, S.length);
+    public JamaMatrix getSmatrixSqrt() {
+        JamaMatrix Smat = new JamaMatrix(S.length, S.length);
         for (int r = 0; r < S.length; r++) {
             Smat.set(r, r, Math.sqrt(S[r]));
         }
@@ -170,7 +171,7 @@ public class ThinSingularValueDecomposition {
      *            the desired rank
      * @return the rank-reduced matrix
      */
-    public static Matrix reduceRank(Matrix m, int rank) {
+    public static JamaMatrix reduceRank(JamaMatrix m, int rank) {
         if (rank > Math.min(m.getColumnDimension(), m.getRowDimension())) {
             return m;
         }

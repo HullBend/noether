@@ -29,7 +29,8 @@
  */
 package org.openimaj.math.matrix;
 
-import gov.nist.math.jama.Matrix;
+import ch.akuhn.matrix.KuhnMatrix;
+import gov.nist.math.jama.JamaMatrix;
 import no.uib.cipr.matrix.NotConvergedException;
 
 /**
@@ -46,7 +47,7 @@ public class PseudoInverse {
      *            The matrix to invert.
      * @return the pseudo-inverse.
      */
-    public static Matrix pseudoInverse(Matrix matrix) {
+    public static JamaMatrix pseudoInverse(JamaMatrix matrix) {
         final no.uib.cipr.matrix.DenseMatrix mjtA = new no.uib.cipr.matrix.DenseMatrix(matrix.getArray());
         no.uib.cipr.matrix.SVD svd;
 
@@ -56,7 +57,7 @@ public class PseudoInverse {
             throw new RuntimeException(e);
         }
 
-        final Matrix Sinv = new Matrix(matrix.getColumnDimension(), matrix.getRowDimension());
+        final JamaMatrix Sinv = new JamaMatrix(matrix.getColumnDimension(), matrix.getRowDimension());
 
         final double[] Sarr = svd.getS();
         for (int i = 0; i < svd.getS().length; i++) {
@@ -64,21 +65,21 @@ public class PseudoInverse {
                 Sinv.set(i, i, 1.0 / Sarr[i]);
         }
 
-        final Matrix Vt = new Matrix(svd.getVt().numRows(), svd.getVt().numColumns());
+        final JamaMatrix Vt = new JamaMatrix(svd.getVt().numRows(), svd.getVt().numColumns());
         for (int r = 0; r < svd.getVt().numRows(); r++) {
             for (int c = 0; c < svd.getVt().numColumns(); c++) {
                 Vt.set(r, c, svd.getVt().get(r, c));
             }
         }
 
-        final Matrix U = new Matrix(svd.getU().numRows(), svd.getU().numColumns());
+        final JamaMatrix U = new JamaMatrix(svd.getU().numRows(), svd.getU().numColumns());
         for (int r = 0; r < svd.getU().numRows(); r++) {
             for (int c = 0; c < svd.getU().numColumns(); c++) {
                 U.set(r, c, svd.getU().get(r, c));
             }
         }
 
-        final Matrix pinv = Vt.transpose().times(Sinv).times(U.transpose());
+        final JamaMatrix pinv = Vt.transpose().times(Sinv).times(U.transpose());
 
         return pinv;
     }
@@ -92,7 +93,7 @@ public class PseudoInverse {
      *            the desired rank.
      * @return the pseudo-inverse.
      */
-    public static Matrix pseudoInverse(Matrix matrix, int rank) {
+    public static JamaMatrix pseudoInverse(JamaMatrix matrix, int rank) {
         return pseudoInverse(new JamaDenseMatrix(matrix), rank);
     }
 
@@ -105,16 +106,16 @@ public class PseudoInverse {
      *            the desired rank.
      * @return the pseudo-inverse.
      */
-    public static Matrix pseudoInverse(ch.akuhn.matrix.Matrix matrix, int rank) {
+    public static JamaMatrix pseudoInverse(KuhnMatrix matrix, int rank) {
         final ThinSingularValueDecomposition tsvd = new ThinSingularValueDecomposition(matrix, rank);
 
-        final Matrix Sinv = new Matrix(tsvd.S.length, tsvd.S.length);
+        final JamaMatrix Sinv = new JamaMatrix(tsvd.S.length, tsvd.S.length);
         for (int i = 0; i < tsvd.S.length; i++) {
             if (tsvd.S[i] != 0.0)
                 Sinv.set(i, i, 1.0 / tsvd.S[i]);
         }
 
-        final Matrix pinv = tsvd.Vt.transpose().times(Sinv).times(tsvd.U.transpose());
+        final JamaMatrix pinv = tsvd.Vt.transpose().times(Sinv).times(tsvd.U.transpose());
 
         return pinv;
     }

@@ -865,7 +865,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
      * @param arg
      *            Square matrix
      */
-    public EigenvalueDecomposition(Matrix arg) {
+    public EigenvalueDecomposition(JamaMatrix arg) {
         double[][] A = arg.getArray();
         n = arg.getColumnDimension();
         V = new double[n][n];
@@ -919,8 +919,8 @@ public class EigenvalueDecomposition implements java.io.Serializable {
      * 
      * @return V
      */
-    public Matrix getV() {
-        return new Matrix(V, n, n);
+    public JamaMatrix getV() {
+        return new JamaMatrix(V, n, n);
     }
 
     /**
@@ -946,8 +946,8 @@ public class EigenvalueDecomposition implements java.io.Serializable {
      * 
      * @return D
      */
-    public Matrix getD() {
-        Matrix X = new Matrix(n, n);
+    public JamaMatrix getD() {
+        JamaMatrix X = new JamaMatrix(n, n);
         double[][] D = X.getArray();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
