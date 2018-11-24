@@ -18,8 +18,9 @@ public class SparseVector extends Vector {
     protected SparseVector(double[] values) {
         this(values.length);
         for (int n = 0; n < values.length; n++) {
-            if (values[n] != 0)
+            if (values[n] != 0.0) {
                 put(n, values[n]);
+            }
         }
     }
 
@@ -43,11 +44,13 @@ public class SparseVector extends Vector {
 
     @Override
     public double add(int key, double value) {
-        if (key < 0 || key >= size)
-            throw new IndexOutOfBoundsException(Integer.toString(key));
-        final int spot = Arrays.binarySearch(keys, 0, used, key);
-        if (spot >= 0)
+        if (key < 0 || key >= size) {
+            throw new IndexOutOfBoundsException(Integer.toString(key, 10));
+        }
+        int spot = Arrays.binarySearch(keys, 0, used, key);
+        if (spot >= 0) {
             return values[spot] += value;
+        }
         return update(-1 - spot, key, value);
     }
 
@@ -68,8 +71,9 @@ public class SparseVector extends Vector {
 
                     @Override
                     public Entry next() {
-                        if (!hasNext())
+                        if (!hasNext()) {
                             throw new NoSuchElementException();
+                        }
                         return new Entry(keys[spot], values[spot++]);
                     }
 
@@ -84,8 +88,8 @@ public class SparseVector extends Vector {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return obj instanceof SparseVector && this.equals((SparseVector) obj);
+    public boolean equals(Object other) {
+        return other instanceof SparseVector && this.equals((SparseVector) other);
     }
 
     /**
@@ -103,10 +107,11 @@ public class SparseVector extends Vector {
 
     @Override
     public double get(int key) {
-        if (key < 0 || key >= size)
-            throw new IndexOutOfBoundsException(Integer.toString(key));
-        final int spot = Arrays.binarySearch(keys, 0, used, key);
-        return spot < 0 ? 0 : values[spot];
+        if (key < 0 || key >= size) {
+            throw new IndexOutOfBoundsException(Integer.toString(key, 10));
+        }
+        int spot = Arrays.binarySearch(keys, 0, used, key);
+        return spot < 0 ? 0.0 : values[spot];
     }
 
     @Override
@@ -127,13 +132,15 @@ public class SparseVector extends Vector {
 
     @Override
     public double put(int key, double value) {
-        if (key < 0 || key >= size)
-            throw new IndexOutOfBoundsException(Integer.toString(key));
-        final int spot = Arrays.binarySearch(keys, 0, used, key);
-        if (spot >= 0)
+        if (key < 0 || key >= size) {
+            throw new IndexOutOfBoundsException(Integer.toString(key, 10));
+        }
+        int spot = Arrays.binarySearch(keys, 0, used, key);
+        if (spot >= 0) {
             return values[spot] = (float) value;
-        else
+        } else {
             return update(-1 - spot, key, value);
+        }
     }
 
     /**
@@ -143,8 +150,9 @@ public class SparseVector extends Vector {
      *            new size
      */
     public void resizeTo(int newSize) {
-        if (newSize < this.size)
+        if (newSize < this.size) {
             throw new UnsupportedOperationException();
+        }
         this.size = newSize;
     }
 
@@ -156,7 +164,7 @@ public class SparseVector extends Vector {
     private double update(int spot, int key, double value) {
         // grow if reaching end of capacity
         if (used == keys.length) {
-            final int capacity = (keys.length * 3) / 2 + 1;
+            int capacity = (keys.length * 3) / 2 + 1;
             keys = Arrays.copyOf(keys, capacity);
             values = Arrays.copyOf(values, capacity);
         }
@@ -185,37 +193,41 @@ public class SparseVector extends Vector {
 
     @Override
     public double dot(Vector x) {
-        double product = 0;
-        for (int k = 0; k < used; k++)
+        double product = 0.0;
+        for (int k = 0; k < used; k++) {
             product += x.get(keys[k]) * values[k];
+        }
         return product;
     }
 
     @Override
     public void scaleAndAddTo(double a, Vector y) {
-        for (int k = 0; k < used; k++)
+        for (int k = 0; k < used; k++) {
             y.add(keys[k], a * values[k]);
+        }
     }
 
     @Override
     public boolean equals(Vector v, double epsilon) {
-        throw new Error("not yet implemented");
+        throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
     public Vector times(double scalar) {
-        final SparseVector y = new SparseVector(size);
+        SparseVector y = new SparseVector(size);
         y.keys = Arrays.copyOf(keys, size);
         y.values = Arrays.copyOf(values, size);
-        for (int i = 0; i < values.length; i++)
+        for (int i = 0; i < values.length; i++) {
             y.values[i] *= scalar;
+        }
         return y;
     }
 
     @Override
     public Vector timesEquals(double scalar) {
-        for (int i = 0; i < values.length; i++)
+        for (int i = 0; i < values.length; i++) {
             values[i] *= scalar;
+        }
         return this;
     }
 
