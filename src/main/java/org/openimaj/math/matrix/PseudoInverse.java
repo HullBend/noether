@@ -59,7 +59,7 @@ public class PseudoInverse {
 
         final double[] Sarr = svd.getS();
         for (int i = 0; i < svd.getS().length; i++) {
-            if (Sarr[i] != 0)
+            if (Sarr[i] != 0.0)
                 Sinv.set(i, i, 1.0 / Sarr[i]);
         }
 
@@ -109,7 +109,7 @@ public class PseudoInverse {
 
         final Matrix Sinv = new Matrix(tsvd.S.length, tsvd.S.length);
         for (int i = 0; i < tsvd.S.length; i++) {
-            if (tsvd.S[i] != 0)
+            if (tsvd.S[i] != 0.0)
                 Sinv.set(i, i, 1.0 / tsvd.S[i]);
         }
 
