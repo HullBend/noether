@@ -50,8 +50,9 @@ public abstract class Vector {
 
                     @Override
                     public Entry next() {
-                        if (!hasNext())
+                        if (!hasNext()) {
                             throw new NoSuchElementException();
+                        }
                         return new Entry(index, get(index++));
                     }
 
@@ -79,9 +80,10 @@ public abstract class Vector {
      * @return the L2 norm
      */
     public double norm() {
-        double sum = 0;
-        for (final Entry each : entries())
-            sum += each.value * each.value;
+        double sum = 0.0;
+        for (Entry each : entries()) {
+            sum += (each.value * each.value);
+        }
         return Math.sqrt(sum);
     }
 
@@ -103,9 +105,10 @@ public abstract class Vector {
      * @return the sum of values
      */
     public double sum() {
-        double sum = 0;
-        for (final Entry each : entries())
+        double sum = 0.0;
+        for (Entry each : entries()) {
             sum += each.value;
+        }
         return sum;
     }
 
@@ -116,9 +119,11 @@ public abstract class Vector {
      */
     public int used() {
         int count = 0;
-        for (final Entry each : entries())
-            if (each.value != 0)
+        for (Entry each : entries()) {
+            if (each.value != 0.0) {
                 count++;
+            }
+        }
         return count;
     }
 
@@ -204,12 +209,12 @@ public abstract class Vector {
      * 
      * @param x
      * @return the dot product
-     * 
      */
     public double dot(Vector x) {
-        double product = 0;
-        for (final Entry each : entries())
-            product += each.value * x.get(each.index);
+        double product = 0.0;
+        for (Entry each : entries()) {
+            product += (each.value * x.get(each.index));
+        }
         return product;
     }
 
@@ -218,11 +223,11 @@ public abstract class Vector {
      * 
      * @param a
      * @param y
-     * 
      */
     public void scaleAndAddTo(double a, Vector y) {
-        for (final Entry each : entries())
+        for (Entry each : entries()) {
             y.add(each.index, a * each.value);
+        }
     }
 
     /**
@@ -232,17 +237,19 @@ public abstract class Vector {
      * @param start
      */
     public void storeOn(double[] array, int start) {
-        Arrays.fill(array, start, start + size(), 0);
-        for (final Entry each : entries())
+        Arrays.fill(array, start, start + size(), 0.0);
+        for (Entry each : entries()) {
             array[start + each.index] = each.value;
+        }
     }
 
     @Override
     public String toString() {
         final StringWriter out = new StringWriter();
         out.append("(");
-        for (final Entry each : entries())
+        for (Entry each : entries()) {
             out.append(each.value + ", ");
+        }
         out.append(")");
         return out.toString();
     }
@@ -283,17 +290,18 @@ public abstract class Vector {
      * mean-center the vector
      */
     public void applyCentering() {
-        final double[] values = unwrap();
-        final double mean = Util.sum(values) / values.length;
-        for (int i = 0; i < values.length; i++)
+        double[] values = unwrap();
+        double mean = Util.sum(values) / values.length;
+        for (int i = 0; i < values.length; i++) {
             values[i] -= mean;
+        }
     }
 
     /**
      * @return the mean of the values
      */
     public double mean() {
-        final double[] values = unwrap();
+        double[] values = unwrap();
         return Util.sum(values) / values.length;
     }
 }
