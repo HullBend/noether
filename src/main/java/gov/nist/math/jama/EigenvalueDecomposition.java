@@ -215,12 +215,12 @@ public class EigenvalueDecomposition implements java.io.Serializable {
             }
 
             // If m == l, d[l] is an eigenvalue,
-            // otherwise, iterate.
+            // otherwise, iterate
 
             if (m > l) {
                 int iter = 0;
                 do {
-                    iter = iter + 1; // (Could check iteration count here.)
+                    iter = iter + 1; // (could check iteration count here)
 
                     // Compute implicit shift
 
@@ -239,7 +239,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
                     }
                     f = f + h;
 
-                    // Implicit QL transformation.
+                    // Implicit QL transformation
 
                     p = d[m];
                     double c = 1.0;
@@ -261,7 +261,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
                         p = c * d[i] - s * g;
                         d[i + 1] = h + s * (c * g + s * d[i]);
 
-                        // Accumulate transformation.
+                        // Accumulate transformation
 
                         for (int k = 0; k < n; k++) {
                             h = V[k][i + 1];
@@ -273,7 +273,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
                     e[l] = s * p;
                     d[l] = c * p;
 
-                    // Check for convergence.
+                    // Check for convergence
 
                 } while (Math.abs(e[l]) > eps * tst1);
             }
@@ -281,7 +281,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
             e[l] = 0.0;
         }
 
-        // Sort eigenvalues and corresponding vectors.
+        // Sort eigenvalues and corresponding vectors
 
         for (int i = 0; i < n - 1; i++) {
             int k = i;
@@ -317,7 +317,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
 
         for (int m = low + 1; m <= high - 1; m++) {
 
-            // Scale column.
+            // Scale column
 
             double scale = 0.0;
             for (int i = m; i <= high; i++) {
@@ -325,7 +325,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
             }
             if (scale != 0.0) {
 
-                // Compute Householder transformation.
+                // Compute Householder transformation
 
                 double h = 0.0;
                 for (int i = high; i >= m; i--) {
@@ -368,7 +368,7 @@ public class EigenvalueDecomposition implements java.io.Serializable {
             }
         }
 
-        // Accumulate transformations (Algol's ortran).
+        // Accumulate transformations (Algol's ortran)
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -886,10 +886,10 @@ public class EigenvalueDecomposition implements java.io.Serializable {
                 }
             }
 
-            // Tridiagonalize.
+            // Tridiagonalize
             tred2();
 
-            // Diagonalize.
+            // Diagonalize
             tql2();
 
         } else {
@@ -902,10 +902,10 @@ public class EigenvalueDecomposition implements java.io.Serializable {
                 }
             }
 
-            // Reduce to Hessenberg form.
+            // Reduce to Hessenberg form
             orthes();
 
-            // Reduce Hessenberg to real Schur form.
+            // Reduce Hessenberg to real Schur form
             hqr2();
         }
     }

@@ -51,7 +51,7 @@ public class QRDecomposition implements java.io.Serializable {
      *            Rectangular matrix
      */
     public QRDecomposition(Matrix A) {
-        // Initialize.
+        // Initialize
         QR = A.getArrayCopy();
         m = A.getRowDimension();
         n = A.getColumnDimension();
@@ -215,7 +215,7 @@ public class QRDecomposition implements java.io.Serializable {
                 }
             }
         }
-        // Solve R*X = Y;
+        // Solve R*X = Y
         for (int k = n - 1; k >= 0; k--) {
             for (int j = 0; j < nx; j++) {
                 X[k][j] /= Rdiag[k];

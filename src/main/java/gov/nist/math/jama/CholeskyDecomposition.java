@@ -79,12 +79,11 @@ public class CholeskyDecomposition implements java.io.Serializable {
 
     /*
      * ------------------------ Temporary, experimental code.
-     * ------------------------
      */
 
     // // Array for internal storage of right triangular decomposition.
     // private transient double[][] R;
-    //
+
     // /**
     // * Right Triangular Cholesky Decomposition.
     // * <p>
