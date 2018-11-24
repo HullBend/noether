@@ -40,6 +40,9 @@ public class SymmetricMatrix extends DenseMatrix {
 
     @Override
     protected double[][] makeValues(int rows, int columns) {
+        if (rows != columns) {
+            throw new IllegalArgumentException("rows != columns");
+        }
         double[][] values = new double[rows][];
         for (int n = 0; n < values.length; n++) {
             values[n] = new double[n + 1];
@@ -76,6 +79,9 @@ public class SymmetricMatrix extends DenseMatrix {
     public static DenseMatrix fromSquare(double[][] square) {
         double[][] jagged = new double[square.length][];
         for (int i = 0; i < jagged.length; i++) {
+            if (square[i].length != square.length) {
+                throw new IllegalArgumentException("square[i].length != square.length : i = " + i);
+            }
             jagged[i] = Arrays.copyOf(square[i], i + 1);
         }
         return new SymmetricMatrix(jagged);
@@ -113,6 +119,9 @@ public class SymmetricMatrix extends DenseMatrix {
 
     @Override
     public Vector mult(Vector v) {
+        if (v.size() != values.length) {
+            throw new IllegalArgumentException("Vector.size() != values.length : " + v.size());
+        }
         double[] mult = new double[v.size()];
         for (int i = 0; i < values.length; i++) {
             for (int j = 0; j < i; j++) {
