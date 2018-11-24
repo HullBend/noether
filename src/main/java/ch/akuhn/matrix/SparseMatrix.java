@@ -188,7 +188,6 @@ public class SparseMatrix extends Matrix {
     public static SparseMatrix readFrom(Scanner scan) {
         int columns = scan.nextInt();
         int rows = scan.nextInt();
-        @SuppressWarnings("unused")
         int used = scan.nextInt();
         SparseMatrix matrix = new SparseMatrix(rows, columns);
         for (int row = 0; row < rows; row++) {
@@ -198,6 +197,9 @@ public class SparseMatrix extends Matrix {
                 double value = scan.nextDouble();
                 matrix.put(row, column, value);
             }
+        }
+        if (matrix.used() != used) {
+            throw new IllegalStateException("matrix.used() != used");
         }
         return matrix;
     }
@@ -225,11 +227,14 @@ public class SparseMatrix extends Matrix {
 
     @Override
     public Vector mult(Vector dense) {
+        if (dense.size() != columnCount()) {
+            throw new IllegalArgumentException("Vector.size() != columnCount() : " + dense.size());
+        }
         double[] y = new double[this.rowCount()];
         double[] x = ((DenseVector) dense).values;
         for (int i = 0; i < y.length; i++) {
             SparseVector row = (SparseVector) rows.get(i);
-            double sum = 0;
+            double sum = 0.0;
             for (int k = 0; k < row.used; k++) {
                 sum += x[row.keys[k]] * row.values[k];
             }
@@ -240,6 +245,9 @@ public class SparseMatrix extends Matrix {
 
     @Override
     public Vector transposeMultiply(Vector dense) {
+        if (dense.size() != rowCount()) {
+            throw new IllegalArgumentException("Vector.size() != rowCount() : " + dense.size());
+        }
         double[] y = new double[this.columnCount()];
         double[] x = ((DenseVector) dense).values;
         for (int i = 0; i < x.length; i++) {
