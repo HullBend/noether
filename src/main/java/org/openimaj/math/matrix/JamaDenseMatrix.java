@@ -39,6 +39,7 @@ import java.util.Arrays;
  * @author Jonathon Hare (jsh2@ecs.soton.ac.uk)
  */
 public class JamaDenseMatrix extends ch.akuhn.matrix.Matrix {
+
     /** The underlying matrix */
     public Matrix matrix;
 
@@ -64,12 +65,14 @@ public class JamaDenseMatrix extends ch.akuhn.matrix.Matrix {
     }
 
     protected void assertInvariant() throws IllegalArgumentException {
-        if (matrix.getArray().length == 0)
+        if (matrix.getArray().length == 0) {
             return;
-        final int m = matrix.getArray()[0].length;
+        }
+        int m = matrix.getArray()[0].length;
         for (int n = 0; n < matrix.getArray().length; n++) {
-            if (matrix.getArray()[n].length != m)
+            if (matrix.getArray()[n].length != m) {
                 throw new IllegalArgumentException();
+            }
         }
     }
 
@@ -128,8 +131,9 @@ public class JamaDenseMatrix extends ch.akuhn.matrix.Matrix {
      *            the value to set the elements to.
      */
     public void fill(double constant) {
-        for (final double[] row : matrix.getArray())
+        for (double[] row : matrix.getArray()) {
             Arrays.fill(row, constant);
+        }
     }
 
     /**

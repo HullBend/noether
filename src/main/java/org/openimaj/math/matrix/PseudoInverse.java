@@ -38,6 +38,7 @@ import no.uib.cipr.matrix.NotConvergedException;
  * @author Jonathon Hare (jsh2@ecs.soton.ac.uk)
  */
 public class PseudoInverse {
+
     /**
      * Compute the Moore-Penrose Pseudo-Inverse.
      *

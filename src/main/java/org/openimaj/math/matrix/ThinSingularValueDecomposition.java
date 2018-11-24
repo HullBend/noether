@@ -94,11 +94,11 @@ public class ThinSingularValueDecomposition {
         // U.getColumnDimension()) - 1);
         // this.Vt = Vt.getMatrix(0, Math.min(Vt.getRowDimension(), ndims) - 1,
         // 0, Vt.getColumnDimension() - 1);
-        // } catch (final NotConvergedException e) {
+        // } catch (NotConvergedException e) {
         // throw new RuntimeException(e);
         // }
         // } else {
-        final SingularValues sv = new SingularValues(matrix, ndims);
+        SingularValues sv = new SingularValues(matrix, ndims);
 
         // Note: SingularValues uses JARPACK which isn't currently
         // thread-safe :-(
@@ -112,22 +112,23 @@ public class ThinSingularValueDecomposition {
         // }
     }
 
-    protected double[] reverse(double[] vector) {
+    protected static double[] reverse(double[] vector) {
         for (int i = 0; i < vector.length / 2; i++) {
-            final double tmp = vector[i];
+            double tmp = vector[i];
             vector[i] = vector[vector.length - i - 1];
             vector[vector.length - i - 1] = tmp;
         }
         return vector;
     }
 
-    protected Matrix vectorArrayToMatrix(Vector[] vectors, boolean rows) {
+    protected static Matrix vectorArrayToMatrix(Vector[] vectors, boolean rows) {
         final int m = vectors.length;
 
         final double[][] data = new double[m][];
 
-        for (int i = 0; i < m; i++)
+        for (int i = 0; i < m; i++) {
             data[m - i - 1] = vectors[i].unwrap();
+        }
 
         Matrix mat = new Matrix(data);
 
@@ -141,11 +142,10 @@ public class ThinSingularValueDecomposition {
      * @return The S matrix
      */
     public Matrix getSmatrix() {
-        final Matrix Smat = new Matrix(S.length, S.length);
-
-        for (int r = 0; r < S.length; r++)
+        Matrix Smat = new Matrix(S.length, S.length);
+        for (int r = 0; r < S.length; r++) {
             Smat.set(r, r, S[r]);
-
+        }
         return Smat;
     }
 
@@ -153,11 +153,10 @@ public class ThinSingularValueDecomposition {
      * @return The sqrt of the singular vals as a matrix.
      */
     public Matrix getSmatrixSqrt() {
-        final Matrix Smat = new Matrix(S.length, S.length);
-
-        for (int r = 0; r < S.length; r++)
+        Matrix Smat = new Matrix(S.length, S.length);
+        for (int r = 0; r < S.length; r++) {
             Smat.set(r, r, Math.sqrt(S[r]));
-
+        }
         return Smat;
     }
 
@@ -175,8 +174,7 @@ public class ThinSingularValueDecomposition {
         if (rank > Math.min(m.getColumnDimension(), m.getRowDimension())) {
             return m;
         }
-
-        final ThinSingularValueDecomposition t = new ThinSingularValueDecomposition(m, rank);
+        ThinSingularValueDecomposition t = new ThinSingularValueDecomposition(m, rank);
         return t.U.times(t.getSmatrix()).times(t.Vt);
     }
 }
