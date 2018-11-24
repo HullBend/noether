@@ -23,10 +23,11 @@ import ch.akuhn.matrix.Vector;
  */
 public class AllEigenvalues extends Eigenvalues {
 
-    private LAPACK lapack = LAPACK.getInstance();
+    private static final boolean l = true;
+    private static final boolean r = false;
 
-    private boolean l = true;
-    private boolean r = false;
+    private final LAPACK lapack = LAPACK.getInstance();
+    private final Matrix A;
 
     /**
      * Construct with the given matrix
@@ -38,17 +39,15 @@ public class AllEigenvalues extends Eigenvalues {
         this.A = A;
     }
 
-    private Matrix A;
-
     @Override
     public AllEigenvalues run() {
-        final double[] wr = new double[n];
-        final double[] wi = new double[n];
-        final intW info = new intW(0);
-        final double[] a = A.asColumnMajorArray();
-        final double[] vl = new double[l ? n * n : 0];
-        final double[] vr = new double[r ? n * n : 0];
-        final double[] work = allocateWorkspace();
+        double[] wr = new double[n];
+        double[] wi = new double[n];
+        intW info = new intW(0);
+        double[] a = A.asColumnMajorArray();
+        double[] vl = new double[l ? n * n : 0];
+        double[] vr = new double[r ? n * n : 0];
+        double[] work = allocateWorkspace();
         lapack.dgeev(
                 jobv(l),
                 jobv(r),
@@ -64,21 +63,21 @@ public class AllEigenvalues extends Eigenvalues {
                 work,
                 work.length,
                 info);
-        if (info.val != 0)
-            throw new Error("dgeev ERRNO=" + info.val);
+        if (info.val != 0) {
+            throw new RuntimeException("dgeev ERRNO=" + info.val);
+        }
         postprocess(wr, vl);
         return this;
     }
 
     /**
-     * <PRE>
+     * <pre>
      * [wr,vl.enum_cons(n)]
      *  .transpose
      *  .sort_by(&:first)
      *  .tranpose
      *  .revert
-     * </PRE>
-     *
+     * </pre>
      */
     private void postprocess(double[] wr, double[] vl) {
         class Eigen implements Comparable<Eigen> {
@@ -90,7 +89,7 @@ public class AllEigenvalues extends Eigenvalues {
                 return Double.compare(value0, eigen.value0);
             }
         }
-        final Eigen[] eigen = new Eigen[n];
+        Eigen[] eigen = new Eigen[n];
         for (int i = 0; i < n; i++) {
             eigen[i] = new Eigen();
             eigen[i].value0 = wr[i];
@@ -115,9 +114,10 @@ public class AllEigenvalues extends Eigenvalues {
      * first entry of the WORK array.
      */
     private double[] allocateWorkspace() {
+        @SuppressWarnings("unused")
         int lwork = ((l || r) ? 4 : 3) * n;
-        final double[] query = new double[1];
-        final intW info = new intW(0);
+        double[] query = new double[1];
+        intW info = new intW(0);
         lapack.dgeev(
                 jobv(l),
                 jobv(r),
@@ -133,8 +133,9 @@ public class AllEigenvalues extends Eigenvalues {
                 query,
                 -1,
                 info);
-        if (info.val == 0)
+        if (info.val == 0) {
             lwork = (int) query[0];
+        }
         return new double[lwork];
     }
 }

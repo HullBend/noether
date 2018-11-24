@@ -283,7 +283,7 @@ public abstract class Vector {
      * @return an array
      */
     public double[] unwrap() {
-        throw new Error("cannot unwrap instance of " + getClass());
+        throw new IllegalStateException("cannot unwrap instance of " + getClass());
     }
 
     /**
