@@ -57,7 +57,7 @@ import java.io.StreamTokenizer;
  *         Technology.
  * @version 5 August 1998
  */
-public class Matrix implements Cloneable, java.io.Serializable {
+public class JamaMatrix implements Cloneable, java.io.Serializable {
 
     /*
      * ------------------------ Class variables ------------------------
@@ -90,7 +90,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @param n
      *            Number of columns.
      */
-    public Matrix(int m, int n) {
+    public JamaMatrix(int m, int n) {
         this.m = m;
         this.n = n;
         A = new double[m][n];
@@ -106,7 +106,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @param s
      *            Fill the matrix with this scalar value.
      */
-    public Matrix(int m, int n, double s) {
+    public JamaMatrix(int m, int n, double s) {
         this.m = m;
         this.n = n;
         A = new double[m][n];
@@ -126,7 +126,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *                All rows must have the same length
      * @see #constructWithCopy
      */
-    public Matrix(double[][] A) {
+    public JamaMatrix(double[][] A) {
         m = A.length;
         n = A[0].length;
         for (int i = 0; i < m; i++) {
@@ -147,7 +147,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @param n
      *            Number of columns.
      */
-    public Matrix(double[][] A, int m, int n) {
+    public JamaMatrix(double[][] A, int m, int n) {
         this.A = A;
         this.m = m;
         this.n = n;
@@ -164,7 +164,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @exception IllegalArgumentException
      *                Array length must be a multiple of m.
      */
-    public Matrix(double vals[], int m) {
+    public JamaMatrix(double vals[], int m) {
         this.m = m;
         n = (m != 0 ? vals.length / m : 0);
         if (m * n != vals.length) {
@@ -190,10 +190,10 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @exception IllegalArgumentException
      *                All rows must have the same length
      */
-    public static Matrix constructWithCopy(double[][] A) {
+    public static JamaMatrix constructWithCopy(double[][] A) {
         int m = A.length;
         int n = A[0].length;
-        Matrix X = new Matrix(m, n);
+        JamaMatrix X = new JamaMatrix(m, n);
         double[][] C = X.getArray();
         for (int i = 0; i < m; i++) {
             if (A[i].length != n) {
@@ -209,8 +209,8 @@ public class Matrix implements Cloneable, java.io.Serializable {
     /**
      * Make a deep copy of a matrix
      */
-    public Matrix copy() {
-        Matrix X = new Matrix(m, n);
+    public JamaMatrix copy() {
+        JamaMatrix X = new JamaMatrix(m, n);
         double[][] C = X.getArray();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -329,8 +329,8 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @exception ArrayIndexOutOfBoundsException
      *                Submatrix indices
      */
-    public Matrix getMatrix(int i0, int i1, int j0, int j1) {
-        Matrix X = new Matrix(i1 - i0 + 1, j1 - j0 + 1);
+    public JamaMatrix getMatrix(int i0, int i1, int j0, int j1) {
+        JamaMatrix X = new JamaMatrix(i1 - i0 + 1, j1 - j0 + 1);
         double[][] B = X.getArray();
         try {
             for (int i = i0; i <= i1; i++) {
@@ -355,8 +355,8 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @exception ArrayIndexOutOfBoundsException
      *                Submatrix indices
      */
-    public Matrix getMatrix(int[] r, int[] c) {
-        Matrix X = new Matrix(r.length, c.length);
+    public JamaMatrix getMatrix(int[] r, int[] c) {
+        JamaMatrix X = new JamaMatrix(r.length, c.length);
         double[][] B = X.getArray();
         try {
             for (int i = 0; i < r.length; i++) {
@@ -383,8 +383,8 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @exception ArrayIndexOutOfBoundsException
      *                Submatrix indices
      */
-    public Matrix getMatrix(int i0, int i1, int[] c) {
-        Matrix X = new Matrix(i1 - i0 + 1, c.length);
+    public JamaMatrix getMatrix(int i0, int i1, int[] c) {
+        JamaMatrix X = new JamaMatrix(i1 - i0 + 1, c.length);
         double[][] B = X.getArray();
         try {
             for (int i = i0; i <= i1; i++) {
@@ -411,8 +411,8 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @exception ArrayIndexOutOfBoundsException
      *                Submatrix indices
      */
-    public Matrix getMatrix(int[] r, int j0, int j1) {
-        Matrix X = new Matrix(r.length, j1 - j0 + 1);
+    public JamaMatrix getMatrix(int[] r, int j0, int j1) {
+        JamaMatrix X = new JamaMatrix(r.length, j1 - j0 + 1);
         double[][] B = X.getArray();
         try {
             for (int i = 0; i < r.length; i++) {
@@ -457,7 +457,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @exception ArrayIndexOutOfBoundsException
      *                Submatrix indices
      */
-    public void setMatrix(int i0, int i1, int j0, int j1, Matrix X) {
+    public void setMatrix(int i0, int i1, int j0, int j1, JamaMatrix X) {
         try {
             for (int i = i0; i <= i1; i++) {
                 for (int j = j0; j <= j1; j++) {
@@ -481,7 +481,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @exception ArrayIndexOutOfBoundsException
      *                Submatrix indices
      */
-    public void setMatrix(int[] r, int[] c, Matrix X) {
+    public void setMatrix(int[] r, int[] c, JamaMatrix X) {
         try {
             for (int i = 0; i < r.length; i++) {
                 for (int j = 0; j < c.length; j++) {
@@ -507,7 +507,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @exception ArrayIndexOutOfBoundsException
      *                Submatrix indices
      */
-    public void setMatrix(int[] r, int j0, int j1, Matrix X) {
+    public void setMatrix(int[] r, int j0, int j1, JamaMatrix X) {
         try {
             for (int i = 0; i < r.length; i++) {
                 for (int j = j0; j <= j1; j++) {
@@ -533,7 +533,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @exception ArrayIndexOutOfBoundsException
      *                Submatrix indices
      */
-    public void setMatrix(int i0, int i1, int[] c, Matrix X) {
+    public void setMatrix(int i0, int i1, int[] c, JamaMatrix X) {
         try {
             for (int i = i0; i <= i1; i++) {
                 for (int j = 0; j < c.length; j++) {
@@ -550,8 +550,8 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * 
      * @return A'
      */
-    public Matrix transpose() {
-        Matrix X = new Matrix(n, m);
+    public JamaMatrix transpose() {
+        JamaMatrix X = new JamaMatrix(n, m);
         double[][] C = X.getArray();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -624,8 +624,8 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * 
      * @return -A
      */
-    public Matrix uminus() {
-        Matrix X = new Matrix(m, n);
+    public JamaMatrix uminus() {
+        JamaMatrix X = new JamaMatrix(m, n);
         double[][] C = X.getArray();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -642,9 +642,9 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            another matrix
      * @return A + B
      */
-    public Matrix plus(Matrix B) {
+    public JamaMatrix plus(JamaMatrix B) {
         checkMatrixDimensions(B);
-        Matrix X = new Matrix(m, n);
+        JamaMatrix X = new JamaMatrix(m, n);
         double[][] C = X.getArray();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -661,7 +661,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            another matrix
      * @return A + B
      */
-    public Matrix plusEquals(Matrix B) {
+    public JamaMatrix plusEquals(JamaMatrix B) {
         checkMatrixDimensions(B);
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -678,9 +678,9 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            another matrix
      * @return A - B
      */
-    public Matrix minus(Matrix B) {
+    public JamaMatrix minus(JamaMatrix B) {
         checkMatrixDimensions(B);
-        Matrix X = new Matrix(m, n);
+        JamaMatrix X = new JamaMatrix(m, n);
         double[][] C = X.getArray();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -697,7 +697,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            another matrix
      * @return A - B
      */
-    public Matrix minusEquals(Matrix B) {
+    public JamaMatrix minusEquals(JamaMatrix B) {
         checkMatrixDimensions(B);
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -714,9 +714,9 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            another matrix
      * @return A.*B
      */
-    public Matrix arrayTimes(Matrix B) {
+    public JamaMatrix arrayTimes(JamaMatrix B) {
         checkMatrixDimensions(B);
-        Matrix X = new Matrix(m, n);
+        JamaMatrix X = new JamaMatrix(m, n);
         double[][] C = X.getArray();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -733,7 +733,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            another matrix
      * @return A.*B
      */
-    public Matrix arrayTimesEquals(Matrix B) {
+    public JamaMatrix arrayTimesEquals(JamaMatrix B) {
         checkMatrixDimensions(B);
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -750,9 +750,9 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            another matrix
      * @return A./B
      */
-    public Matrix arrayRightDivide(Matrix B) {
+    public JamaMatrix arrayRightDivide(JamaMatrix B) {
         checkMatrixDimensions(B);
-        Matrix X = new Matrix(m, n);
+        JamaMatrix X = new JamaMatrix(m, n);
         double[][] C = X.getArray();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -769,7 +769,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            another matrix
      * @return A./B
      */
-    public Matrix arrayRightDivideEquals(Matrix B) {
+    public JamaMatrix arrayRightDivideEquals(JamaMatrix B) {
         checkMatrixDimensions(B);
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -786,9 +786,9 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            another matrix
      * @return A.\B
      */
-    public Matrix arrayLeftDivide(Matrix B) {
+    public JamaMatrix arrayLeftDivide(JamaMatrix B) {
         checkMatrixDimensions(B);
-        Matrix X = new Matrix(m, n);
+        JamaMatrix X = new JamaMatrix(m, n);
         double[][] C = X.getArray();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -805,7 +805,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            another matrix
      * @return A.\B
      */
-    public Matrix arrayLeftDivideEquals(Matrix B) {
+    public JamaMatrix arrayLeftDivideEquals(JamaMatrix B) {
         checkMatrixDimensions(B);
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -822,8 +822,8 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            scalar
      * @return s*A
      */
-    public Matrix times(double s) {
-        Matrix X = new Matrix(m, n);
+    public JamaMatrix times(double s) {
+        JamaMatrix X = new JamaMatrix(m, n);
         double[][] C = X.getArray();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -840,7 +840,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            scalar
      * @return replace A by s*A
      */
-    public Matrix timesEquals(double s) {
+    public JamaMatrix timesEquals(double s) {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 A[i][j] = s * A[i][j];
@@ -858,11 +858,11 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @exception IllegalArgumentException
      *                Matrix inner dimensions must agree.
      */
-    public Matrix times(Matrix B) {
+    public JamaMatrix times(JamaMatrix B) {
         if (B.m != n) {
             throw new IllegalArgumentException("Matrix inner dimensions must agree.");
         }
-        Matrix X = new Matrix(m, B.n);
+        JamaMatrix X = new JamaMatrix(m, B.n);
         double[][] C = X.getArray();
         double[] Bcolj = new double[n];
         for (int j = 0; j < B.n; j++) {
@@ -938,7 +938,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            right hand side
      * @return solution if A is square, least squares solution otherwise
      */
-    public Matrix solve(Matrix B) {
+    public JamaMatrix solve(JamaMatrix B) {
         return (m == n ? (new LUDecomposition(this)).solve(B) : (new QRDecomposition(this)).solve(B));
     }
 
@@ -949,7 +949,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            right hand side
      * @return solution if A is square, least squares solution otherwise.
      */
-    public Matrix solveTranspose(Matrix B) {
+    public JamaMatrix solveTranspose(JamaMatrix B) {
         return transpose().solve(B.transpose());
     }
 
@@ -958,7 +958,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * 
      * @return inverse(A) if A is square, pseudo-inverse otherwise.
      */
-    public Matrix inverse() {
+    public JamaMatrix inverse() {
         return solve(identity(m, m));
     }
 
@@ -1011,8 +1011,8 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            Number of columns.
      * @return An m-by-n matrix with uniformly distributed random elements.
      */
-    public static Matrix random(int m, int n) {
-        Matrix A = new Matrix(m, n);
+    public static JamaMatrix random(int m, int n) {
+        JamaMatrix A = new JamaMatrix(m, n);
         double[][] X = A.getArray();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -1031,8 +1031,8 @@ public class Matrix implements Cloneable, java.io.Serializable {
      *            Number of columns.
      * @return An m-by-n matrix with ones on the diagonal and zeros elsewhere.
      */
-    public static Matrix identity(int m, int n) {
-        Matrix A = new Matrix(m, n);
+    public static JamaMatrix identity(int m, int n) {
+        JamaMatrix A = new JamaMatrix(m, n);
         double[][] X = A.getArray();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -1137,7 +1137,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
      * @param input
      *            the input stream.
      */
-    public static Matrix read(BufferedReader input) throws java.io.IOException {
+    public static JamaMatrix read(BufferedReader input) throws java.io.IOException {
         StreamTokenizer tokenizer = new StreamTokenizer(input);
 
         // Although StreamTokenizer will parse numbers, it doesn't recognize
@@ -1183,7 +1183,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
         int m = v.size(); // Now we've got the number of rows.
         double[][] A = new double[m][];
         v.copyInto(A); // copy the rows out of the vector
-        return new Matrix(A);
+        return new JamaMatrix(A);
     }
 
     /*
@@ -1192,7 +1192,7 @@ public class Matrix implements Cloneable, java.io.Serializable {
 
     /** Check if size(A) == size(B) **/
 
-    private void checkMatrixDimensions(Matrix B) {
+    private void checkMatrixDimensions(JamaMatrix B) {
         if (B.m != m || B.n != n) {
             throw new IllegalArgumentException("Matrix dimensions must agree.");
         }

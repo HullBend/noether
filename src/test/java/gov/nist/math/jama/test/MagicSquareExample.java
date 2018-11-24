@@ -8,7 +8,7 @@ import java.util.Date;
 public class MagicSquareExample {
 
     /** Generate magic square test matrix. **/
-    public static Matrix magic(int n) {
+    public static JamaMatrix magic(int n) {
 
         double[][] M = new double[n][n];
 
@@ -41,7 +41,7 @@ public class MagicSquareExample {
         } else {
             int p = n / 2;
             int k = (n - 2) / 4;
-            Matrix A = magic(p);
+            JamaMatrix A = magic(p);
             for (int j = 0; j < p; j++) {
                 for (int i = 0; i < p; i++) {
                     double aij = A.get(i, j);
@@ -70,7 +70,7 @@ public class MagicSquareExample {
             M[k][k] = M[k + p][k];
             M[k + p][k] = t;
         }
-        return new Matrix(M);
+        return new JamaMatrix(M);
     }
 
     /** Shorten spelling of print. **/
@@ -121,7 +121,7 @@ public class MagicSquareExample {
         for (int n = 3; n <= 32; n++) {
             print(fixedWidthIntegertoString(n, 7));
 
-            Matrix M = magic(n);
+            JamaMatrix M = magic(n);
 
             int t = (int) M.trace();
             print(fixedWidthIntegertoString(t, 10));
@@ -137,15 +137,15 @@ public class MagicSquareExample {
             print(c < 1 / eps ? fixedWidthDoubletoString(c, 12, 3) : "         Inf");
 
             LUDecomposition LU = new LUDecomposition(M);
-            Matrix L = LU.getL();
-            Matrix U = LU.getU();
+            JamaMatrix L = LU.getL();
+            JamaMatrix U = LU.getU();
             int[] p = LU.getPivot();
-            Matrix R = L.times(U).minus(M.getMatrix(p, 0, n - 1));
+            JamaMatrix R = L.times(U).minus(M.getMatrix(p, 0, n - 1));
             double res = R.norm1() / (n * eps);
             print(fixedWidthDoubletoString(res, 12, 3));
 
             QRDecomposition QR = new QRDecomposition(M);
-            Matrix Q = QR.getQ();
+            JamaMatrix Q = QR.getQ();
             R = QR.getR();
             R = Q.times(R).minus(M);
             res = R.norm1() / (n * eps);

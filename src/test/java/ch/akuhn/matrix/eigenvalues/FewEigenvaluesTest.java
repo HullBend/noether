@@ -4,15 +4,15 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import ch.akuhn.matrix.Matrix;
+import ch.akuhn.matrix.KuhnMatrix;
 
 public class FewEigenvaluesTest {
 
     private FewEigenvalues eigen;
-    private Matrix A;
+    private KuhnMatrix A;
 
-    private Matrix randomSymetricMatrix(int n) {
-        Matrix S = Matrix.dense(n, n);
+    private KuhnMatrix randomSymetricMatrix(int n) {
+        KuhnMatrix S = KuhnMatrix.dense(n, n);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < i; j++) {
                 double value = Math.random() * 23;
@@ -60,7 +60,7 @@ public class FewEigenvaluesTest {
 
     @Test
     public void shouldDecomposeSmallMatrix() {
-        A = Matrix.from(3, 3, 0, 1, -1, 1, 1, 0, -1, 0, 1);
+        A = KuhnMatrix.from(3, 3, 0, 1, -1, 1, 1, 0, -1, 0, 1);
         eigen = FewEigenvalues.of(A).largest(2);
         eigen.run();
 

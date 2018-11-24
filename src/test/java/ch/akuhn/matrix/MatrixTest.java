@@ -11,7 +11,7 @@ public class MatrixTest {
     @Test
     public void shouldMultiplySparseMatrixAndVector() {
         Vector x = Vector.from(8,9,10,11,12);
-        Matrix A = new SparseMatrix(new double[][] {
+        KuhnMatrix A = new SparseMatrix(new double[][] {
                 {0,1,0,2,0},
                 {3,0,4,0,5},
                 {0,6,0,7,0}});
@@ -30,7 +30,7 @@ public class MatrixTest {
     @Test
     public void shouldMultiplyTransposedSparseMatrixAndVector() {
         Vector x = Vector.from(8,9,10);
-        Matrix A = new SparseMatrix(new double[][] {
+        KuhnMatrix A = new SparseMatrix(new double[][] {
                 {0,1,0,2,0},
                 {3,0,4,0,5},
                 {0,6,0,7,0}});
@@ -51,7 +51,7 @@ public class MatrixTest {
     @Test
     public void shouldMultiplyMatrixAndVector() {
         Vector x = Vector.from(7,8,9);
-        Matrix A = Matrix.from(2,3,
+        KuhnMatrix A = KuhnMatrix.from(2,3,
                 1,2,3,
                 4,5,6);
         assertEquals(3, x.size());
@@ -67,7 +67,7 @@ public class MatrixTest {
     @Test
     public void shouldMultiplyTransposedMatrixAndVector() {
         Vector x = Vector.from(7,8,9);
-        Matrix A = Matrix.from(3,2,
+        KuhnMatrix A = KuhnMatrix.from(3,2,
                 1,2,
                 3,4,
                 5,6);
@@ -83,21 +83,21 @@ public class MatrixTest {
 
     @Test(expected=IllegalArgumentException.class)
     public void shouldFailWhenSizeDoesNotConform() {
-        Matrix.dense(3,2).mult(Vector.dense(3));
+        KuhnMatrix.dense(3,2).mult(Vector.dense(3));
     }
 
     @Test
     public void whenEmptyshouldNotHaveMaximum() {
-        assertEquals(Double.NaN, Matrix.dense(0,0).max(), epsilon);
+        assertEquals(Double.NaN, KuhnMatrix.dense(0,0).max(), epsilon);
     }
 
     @Test
     public void whenEmptyshouldNotHaveMinimum() {
-        assertEquals(Double.NaN, Matrix.dense(0,0).min(), epsilon);
+        assertEquals(Double.NaN, KuhnMatrix.dense(0,0).min(), epsilon);
     }
 
     @Test
     public void whenEmptyshouldNotHaveMean() {
-        assertEquals(Double.NaN, Matrix.dense(0,0).mean(), epsilon);
+        assertEquals(Double.NaN, KuhnMatrix.dense(0,0).mean(), epsilon);
     }
 }

@@ -42,7 +42,7 @@ import java.util.Locale;
 public class TestMatrix {
 
     public static void main(String argv[]) {
-        Matrix A, B, C, Z, O, I, R, S, X, SUB, M, T, SQ, DEF, SOL;
+        JamaMatrix A, B, C, Z, O, I, R, S, X, SUB, M, T, SQ, DEF, SOL;
         // Uncomment this to test IO in a different locale.
         // Locale.setDefault(Locale.GERMAN);
         int errorCount = 0;
@@ -93,7 +93,7 @@ public class TestMatrix {
              * check that exception is thrown in packed constructor with invalid
              * length
              **/
-            A = new Matrix(columnwise, invalidld);
+            A = new JamaMatrix(columnwise, invalidld);
             errorCount = try_failure(errorCount, "Catch invalid length in packed constructor... ",
                     "exception not thrown for invalid input");
         } catch (IllegalArgumentException e) {
@@ -104,7 +104,7 @@ public class TestMatrix {
              * check that exception is thrown in default constructor if input
              * array is 'ragged'
              **/
-            A = new Matrix(rvals);
+            A = new JamaMatrix(rvals);
             tmp = A.get(raggedr, raggedc);
         } catch (IllegalArgumentException e) {
             try_success("Catch ragged input to default constructor... ", e.getMessage());
@@ -117,7 +117,7 @@ public class TestMatrix {
              * check that exception is thrown in constructWithCopy if input
              * array is 'ragged'
              **/
-            A = Matrix.constructWithCopy(rvals);
+            A = JamaMatrix.constructWithCopy(rvals);
             tmp = A.get(raggedr, raggedc);
         } catch (IllegalArgumentException e) {
             try_success("Catch ragged input to constructWithCopy... ", e.getMessage());
@@ -126,13 +126,13 @@ public class TestMatrix {
                     "exception not thrown in construction...ArrayIndexOutOfBoundsException thrown later");
         }
 
-        A = new Matrix(columnwise, validld);
-        B = new Matrix(avals);
+        A = new JamaMatrix(columnwise, validld);
+        B = new JamaMatrix(avals);
         tmp = B.get(0, 0);
         avals[0][0] = 0.0;
         C = B.minus(A);
         avals[0][0] = tmp;
-        B = Matrix.constructWithCopy(avals);
+        B = JamaMatrix.constructWithCopy(avals);
         tmp = B.get(0, 0);
         avals[0][0] = 0.0;
         if ((tmp - B.get(0, 0)) != 0.0) {
@@ -142,9 +142,9 @@ public class TestMatrix {
             try_success("constructWithCopy... ", "");
         }
         avals[0][0] = columnwise[0];
-        I = new Matrix(ivals);
+        I = new JamaMatrix(ivals);
         try {
-            check(I, Matrix.identity(3, 4));
+            check(I, JamaMatrix.identity(3, 4));
             try_success("identity... ", "");
         } catch (java.lang.RuntimeException e) {
             errorCount = try_failure(errorCount, "identity... ", "identity Matrix not successfully created");
@@ -165,7 +165,7 @@ public class TestMatrix {
          * Various get methods:
          **/
 
-        B = new Matrix(avals);
+        B = new JamaMatrix(avals);
         if (B.getRowDimension() != rows) {
             errorCount = try_failure(errorCount, "getRowDimension... ", "");
         } else {
@@ -176,7 +176,7 @@ public class TestMatrix {
         } else {
             try_success("getColumnDimension... ", "");
         }
-        B = new Matrix(avals);
+        B = new JamaMatrix(avals);
         double[][] barray = B.getArray();
         if (barray != avals) {
             errorCount = try_failure(errorCount, "getArray... ", "");
@@ -233,7 +233,7 @@ public class TestMatrix {
         } catch (java.lang.ArrayIndexOutOfBoundsException e) {
             errorCount = try_failure(errorCount, "get(int,int)... ", "Unexpected ArrayIndexOutOfBoundsException");
         }
-        SUB = new Matrix(subavals);
+        SUB = new JamaMatrix(subavals);
         try {
             M = B.getMatrix(ib, ie + B.getRowDimension() + 1, jb, je);
             errorCount = try_failure(errorCount, "getMatrix(int,int,int,int)... ",
@@ -385,7 +385,7 @@ public class TestMatrix {
             errorCount = try_failure(errorCount, "set(int,int,double)... ",
                     "Unexpected ArrayIndexOutOfBoundsException");
         }
-        M = new Matrix(2, 3, 0.);
+        M = new JamaMatrix(2, 3, 0.);
         try {
             B.setMatrix(ib, ie + B.getRowDimension() + 1, jb, je, M);
             errorCount = try_failure(errorCount, "setMatrix(int,int,int,int,Matrix)... ",
@@ -513,8 +513,8 @@ public class TestMatrix {
          */
 
         print("\nTesting array-like methods...\n");
-        S = new Matrix(columnwise, nonconformld);
-        R = Matrix.random(A.getRowDimension(), A.getColumnDimension());
+        S = new JamaMatrix(columnwise, nonconformld);
+        R = JamaMatrix.random(A.getRowDimension(), A.getColumnDimension());
         A = R;
         try {
             S = A.minus(S);
@@ -530,7 +530,7 @@ public class TestMatrix {
         }
         A = R.copy();
         A.minusEquals(R);
-        Z = new Matrix(A.getRowDimension(), A.getColumnDimension());
+        Z = new JamaMatrix(A.getRowDimension(), A.getColumnDimension());
         try {
             A.minusEquals(S);
             errorCount = try_failure(errorCount, "minusEquals conformance check... ", "nonconformance not raised");
@@ -545,7 +545,7 @@ public class TestMatrix {
         }
 
         A = R.copy();
-        B = Matrix.random(A.getRowDimension(), A.getColumnDimension());
+        B = JamaMatrix.random(A.getRowDimension(), A.getColumnDimension());
         C = A.minus(B);
         try {
             S = A.plus(S);
@@ -581,7 +581,7 @@ public class TestMatrix {
             errorCount = try_failure(errorCount, "uminus... ", "(-A + A != zeros)");
         }
         A = R.copy();
-        O = new Matrix(A.getRowDimension(), A.getColumnDimension(), 1.0);
+        O = new JamaMatrix(A.getRowDimension(), A.getColumnDimension(), 1.0);
         C = A.arrayLeftDivide(R);
         try {
             S = A.arrayLeftDivide(S);
@@ -638,7 +638,7 @@ public class TestMatrix {
             errorCount = try_failure(errorCount, "arrayRightDivideEquals... ", "(M./M != ones)");
         }
         A = R.copy();
-        B = Matrix.random(A.getRowDimension(), A.getColumnDimension());
+        B = JamaMatrix.random(A.getRowDimension(), A.getColumnDimension());
         try {
             S = A.arrayTimes(S);
             errorCount = try_failure(errorCount, "arrayTimes conformance check... ", "nonconformance not raised");
@@ -677,7 +677,7 @@ public class TestMatrix {
             PrintWriter FILE = new PrintWriter(new FileOutputStream("JamaTestMatrix.out"));
             A.print(FILE, fmt, 10);
             FILE.close();
-            R = Matrix.read(new BufferedReader(new FileReader("JamaTestMatrix.out")));
+            R = JamaMatrix.read(new BufferedReader(new FileReader("JamaTestMatrix.out")));
             if (A.minus(R).norm1() < .001) {
                 try_success("print()/read()...", "");
             } else {
@@ -696,7 +696,7 @@ public class TestMatrix {
                 PrintWriter FILE = new PrintWriter(new FileOutputStream("JamaTestMatrix.out"));
                 A.print(FILE, fmt, 10);
                 FILE.close();
-                R = Matrix.read(new BufferedReader(new FileReader("JamaTestMatrix.out")));
+                R = JamaMatrix.read(new BufferedReader(new FileReader("JamaTestMatrix.out")));
                 if (A.minus(R).norm1() < .001) {
                     try_success("print()/read()...", "");
                 } else {
@@ -709,14 +709,14 @@ public class TestMatrix {
             }
         }
 
-        R = Matrix.random(A.getRowDimension(), A.getColumnDimension());
+        R = JamaMatrix.random(A.getRowDimension(), A.getColumnDimension());
         String tmpname = "TMPMATRIX.serial";
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(tmpname));
             out.writeObject(R);
             out.close();
             ObjectInputStream sin = new ObjectInputStream(new FileInputStream(tmpname));
-            A = (Matrix) sin.readObject();
+            A = (JamaMatrix) sin.readObject();
             sin.close();
 
             try {
@@ -740,8 +740,8 @@ public class TestMatrix {
          */
 
         print("\nTesting linear algebra methods...\n");
-        A = new Matrix(columnwise, 3);
-        T = new Matrix(tvals);
+        A = new JamaMatrix(columnwise, 3);
+        T = new JamaMatrix(tvals);
         T = A.transpose();
         try {
             check(A.transpose(), T);
@@ -780,7 +780,7 @@ public class TestMatrix {
         } catch (java.lang.RuntimeException e) {
             errorCount = try_failure(errorCount, "det()...", "incorrect determinant calculation");
         }
-        SQ = new Matrix(square);
+        SQ = new JamaMatrix(square);
         try {
             check(A.times(A.transpose()), SQ);
             try_success("times(Matrix)...", "");
@@ -794,7 +794,7 @@ public class TestMatrix {
             errorCount = try_failure(errorCount, "times(double)...", "incorrect Matrix-scalar product calculation");
         }
 
-        A = new Matrix(columnwise, 4);
+        A = new JamaMatrix(columnwise, 4);
         QRDecomposition QR = A.qr();
         R = QR.getR();
         try {
@@ -811,14 +811,14 @@ public class TestMatrix {
             errorCount = try_failure(errorCount, "SingularValueDecomposition...",
                     "incorrect singular value decomposition calculation");
         }
-        DEF = new Matrix(rankdef);
+        DEF = new JamaMatrix(rankdef);
         try {
             check(DEF.rank(), Math.min(DEF.getRowDimension(), DEF.getColumnDimension()) - 1);
             try_success("rank()...", "");
         } catch (java.lang.RuntimeException e) {
             errorCount = try_failure(errorCount, "rank()...", "incorrect rank calculation");
         }
-        B = new Matrix(condmat);
+        B = new JamaMatrix(condmat);
         SVD = B.svd();
         double[] singularvalues = SVD.getSingularValues();
         try {
@@ -840,13 +840,13 @@ public class TestMatrix {
         }
         X = A.inverse();
         try {
-            check(A.times(X), Matrix.identity(3, 3));
+            check(A.times(X), JamaMatrix.identity(3, 3));
             try_success("inverse()...", "");
         } catch (java.lang.RuntimeException e) {
             errorCount = try_failure(errorCount, "inverse()...", "incorrect inverse calculation");
         }
-        O = new Matrix(SUB.getRowDimension(), 1, 1.0);
-        SOL = new Matrix(sqSolution);
+        O = new JamaMatrix(SUB.getRowDimension(), 1, 1.0);
+        SOL = new JamaMatrix(sqSolution);
         SQ = SUB.getMatrix(0, SUB.getRowDimension() - 1, 0, SUB.getRowDimension() - 1);
         try {
             check(SQ.solve(SOL), O);
@@ -856,9 +856,9 @@ public class TestMatrix {
         } catch (java.lang.RuntimeException e) {
             errorCount = try_failure(errorCount, "solve()...", e.getMessage());
         }
-        A = new Matrix(pvals);
+        A = new JamaMatrix(pvals);
         CholeskyDecomposition Chol = A.chol();
-        Matrix L = Chol.getL();
+        JamaMatrix L = Chol.getL();
         try {
             check(A, L.times(L.transpose()));
             try_success("CholeskyDecomposition...", "");
@@ -866,17 +866,17 @@ public class TestMatrix {
             errorCount = try_failure(errorCount, "CholeskyDecomposition...",
                     "incorrect Cholesky decomposition calculation");
         }
-        X = Chol.solve(Matrix.identity(3, 3));
+        X = Chol.solve(JamaMatrix.identity(3, 3));
         try {
-            check(A.times(X), Matrix.identity(3, 3));
+            check(A.times(X), JamaMatrix.identity(3, 3));
             try_success("CholeskyDecomposition solve()...", "");
         } catch (java.lang.RuntimeException e) {
             errorCount = try_failure(errorCount, "CholeskyDecomposition solve()...",
                     "incorrect Choleskydecomposition solve calculation");
         }
         EigenvalueDecomposition Eig = A.eig();
-        Matrix D = Eig.getD();
-        Matrix V = Eig.getV();
+        JamaMatrix D = Eig.getD();
+        JamaMatrix V = Eig.getV();
         try {
             check(A.times(V), V.times(D));
             try_success("EigenvalueDecomposition (symmetric)...", "");
@@ -884,7 +884,7 @@ public class TestMatrix {
             errorCount = try_failure(errorCount, "EigenvalueDecomposition (symmetric)...",
                     "incorrect symmetric Eigenvalue decomposition calculation");
         }
-        A = new Matrix(evals);
+        A = new JamaMatrix(evals);
         Eig = A.eig();
         D = Eig.getD();
         V = Eig.getV();
@@ -898,7 +898,7 @@ public class TestMatrix {
 
         try {
             print("\nTesting Eigenvalue; If this hangs, we've failed\n");
-            Matrix bA = new Matrix(badeigs);
+            JamaMatrix bA = new JamaMatrix(badeigs);
             @SuppressWarnings("unused")
             EigenvalueDecomposition bEig = bA.eig();
             try_success("EigenvalueDecomposition (hang)...", "");
@@ -939,13 +939,13 @@ public class TestMatrix {
 
     /** Check norm of difference of arrays. **/
     private static void check(double[][] x, double[][] y) {
-        Matrix A = new Matrix(x);
-        Matrix B = new Matrix(y);
+        JamaMatrix A = new JamaMatrix(x);
+        JamaMatrix B = new JamaMatrix(y);
         check(A, B);
     }
 
     /** Check norm of difference of Matrices. **/
-    private static void check(Matrix X, Matrix Y) {
+    private static void check(JamaMatrix X, JamaMatrix Y) {
         double eps = Math.pow(2.0, -52.0);
         if (X.norm1() == 0. & Y.norm1() < 10 * eps)
             return;
@@ -986,7 +986,7 @@ public class TestMatrix {
     private static void print(double[] x, int w, int d) {
         // Use format Fw.d for all elements.
         System.out.print("\n");
-        new Matrix(x, 1).print(w, d);
+        new JamaMatrix(x, 1).print(w, d);
         print("\n");
     }
 }

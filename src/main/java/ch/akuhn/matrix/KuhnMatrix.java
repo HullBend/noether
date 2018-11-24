@@ -18,7 +18,7 @@ import ch.akuhn.matrix.Vector.Entry;
  * 
  * @author Adrian Kuhn
  */
-public abstract class Matrix {
+public abstract class KuhnMatrix {
 
     private static final int MAX_PRINT = 100;
 
@@ -228,14 +228,14 @@ public abstract class Matrix {
 
         @Override
         public double put(int index, double value) {
-            return isRow ? Matrix.this.put(this.index0, index, value)
-                    : Matrix.this.put(index, this.index0, value);
+            return isRow ? KuhnMatrix.this.put(this.index0, index, value)
+                    : KuhnMatrix.this.put(index, this.index0, value);
         }
 
         @Override
         public double get(int index) {
-            return isRow ? Matrix.this.get(this.index0, index)
-                    : Matrix.this.get(index, this.index0);
+            return isRow ? KuhnMatrix.this.get(this.index0, index)
+                    : KuhnMatrix.this.get(index, this.index0);
         }
 
         @Override
@@ -311,7 +311,7 @@ public abstract class Matrix {
      * @param values
      * @return the matrix
      */
-    public static Matrix from(int n, int m, double... values) {
+    public static KuhnMatrix from(int n, int m, double... values) {
         if (n * m != values.length) {
             throw new IllegalArgumentException("n * m != values.length");
         }
@@ -329,7 +329,7 @@ public abstract class Matrix {
      * @param m
      * @return the matrix
      */
-    public static Matrix dense(int n, int m) {
+    public static KuhnMatrix dense(int n, int m) {
         return new DenseMatrix(n, m);
     }
 
@@ -420,7 +420,7 @@ public abstract class Matrix {
     /**
      * @return an empty instance of this matrix type
      */
-    public Matrix newInstance() {
+    public KuhnMatrix newInstance() {
         return newInstance(rowCount(), columnCount());
     }
 
@@ -429,7 +429,7 @@ public abstract class Matrix {
      * @param cols
      * @return an empty instance of this matrix type
      */
-    public abstract Matrix newInstance(int rows, int cols);
+    public abstract KuhnMatrix newInstance(int rows, int cols);
 
     @Override
     public String toString() {
