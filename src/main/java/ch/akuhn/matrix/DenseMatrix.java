@@ -24,12 +24,14 @@ public class DenseMatrix extends Matrix {
     }
 
     protected void assertInvariant() throws IllegalArgumentException {
-        if (values.length == 0)
+        if (values.length == 0) {
             return;
-        final int m = values[0].length;
+        }
+        int m = values[0].length;
         for (int n = 0; n < values.length; n++) {
-            if (values[n].length != m)
+            if (values[n].length != m) {
                 throw new IllegalArgumentException();
+            }
         }
     }
 
@@ -102,7 +104,7 @@ public class DenseMatrix extends Matrix {
 
     @Override
     public int used() {
-        throw null;
+    	throw new IllegalStateException();
     }
 
     @Override
@@ -116,8 +118,9 @@ public class DenseMatrix extends Matrix {
      * @param constant
      */
     public void fill(double constant) {
-        for (final double[] row : values)
+        for (double[] row : values) {
             Arrays.fill(row, constant);
+        }
     }
 
     /**

@@ -116,7 +116,7 @@ public class JamaDenseMatrix extends ch.akuhn.matrix.Matrix {
 
     @Override
     public int used() {
-        throw null;
+        throw new IllegalStateException();
     }
 
     @Override
