@@ -117,6 +117,12 @@ public abstract class FewEigenvalues extends Eigenvalues {
      */
     @Override
     public Eigenvalues run() {
+        if (n <= 0) {
+            throw new IllegalArgumentException("n <= 0 : " + n);
+        }
+        if (nev <= 0) {
+            throw new IllegalArgumentException("nev <= 0 : " + nev);
+        }
         final ARPACK arpack = ARPACK.getInstance();
         /*
          * Setting up parameters for DSAUPD call.
@@ -132,6 +138,10 @@ public abstract class FewEigenvalues extends Eigenvalues {
          * proportional to N*NCV*NCV.
          */
         final int ncv = Math.min(nev * 4, n); // rule of thumb use twice nev
+        if (!(ncv > nev && ncv <= n)) {
+            throw new IllegalArgumentException(
+                    "!(ncv > nev && ncv <= n) : ncv = " + ncv + ", nev = " + nev + ", n = " + n);
+        }
         final double[] v = new double[n * ncv];
         final double[] workd = new double[3 * n];
         final double[] workl = new double[ncv * (ncv + 8)];
@@ -198,6 +208,9 @@ public abstract class FewEigenvalues extends Eigenvalues {
             final int y0 = ipntr[2 - 1] - 1;
             final Vector x = Vector.copy(workd, x0, n);
             final Vector y = this.callback(x);
+            if (y.size() != n) {
+                throw new IllegalArgumentException("callback.size() != n : " + y.size());
+            }
             y.storeOn(workd, y0);
         }
         /*
