@@ -3,7 +3,7 @@ package ch.akuhn.matrix;
 import java.util.Arrays;
 
 /**
- * Matrix where <CODE>a<SUB>ij</SUB> = a<SUB>ji</SUB></CODE> for all elements.
+ * Matrix where <code>a<sub>ij</sub> = a<sub>ji</sub></code> for all elements.
  * <p>
  * 
  * @author Adrian Kuhn
@@ -32,16 +32,18 @@ public class SymmetricMatrix extends DenseMatrix {
     @Override
     protected void assertInvariant() throws IllegalArgumentException {
         for (int n = 0; n < values.length; n++) {
-            if (values[n].length != (n + 1))
+            if (values[n].length != (n + 1)) {
                 throw new IllegalArgumentException();
+            }
         }
     }
 
     @Override
     protected double[][] makeValues(int rows, int columns) {
-        final double[][] values = new double[rows][];
-        for (int n = 0; n < values.length; n++)
+        double[][] values = new double[rows][];
+        for (int n = 0; n < values.length; n++) {
             values[n] = new double[n + 1];
+        }
         return values;
     }
 
@@ -72,7 +74,7 @@ public class SymmetricMatrix extends DenseMatrix {
      * @return the matrix
      */
     public static DenseMatrix fromSquare(double[][] square) {
-        final double[][] jagged = new double[square.length][];
+        double[][] jagged = new double[square.length][];
         for (int i = 0; i < jagged.length; i++) {
             jagged[i] = Arrays.copyOf(square[i], i + 1);
         }
@@ -96,21 +98,22 @@ public class SymmetricMatrix extends DenseMatrix {
 
     @Override
     public double[] rowwiseMean() {
-        final double[] mean = new double[rowCount()];
+        double[] mean = new double[rowCount()];
         for (int i = 0; i < values.length; i++) {
             for (int j = 0; j < i; j++) {
                 mean[i] += values[i][j];
                 mean[j] += values[i][j];
             }
         }
-        for (int n = 0; n < mean.length; n++)
+        for (int n = 0; n < mean.length; n++) {
             mean[n] /= mean.length;
+        }
         return mean;
     }
 
     @Override
     public Vector mult(Vector v) {
-        final double[] mult = new double[v.size()];
+        double[] mult = new double[v.size()];
         for (int i = 0; i < values.length; i++) {
             for (int j = 0; j < i; j++) {
                 mult[i] += values[i][j] * v.get(j);
