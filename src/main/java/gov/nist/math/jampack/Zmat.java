@@ -1,4 +1,4 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
 /**
  * Zmat implements general complex matrix stored in a rectangular array class Z.
@@ -6,7 +6,7 @@ package math.complex.mdc;
  * @version Pre-alpha
  * @author G. W. Stewart
  */
-final class Zmat {
+public final class Zmat {
 
     boolean isPosSemiDefinite = false;
 

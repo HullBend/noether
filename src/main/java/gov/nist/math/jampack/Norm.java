@@ -1,4 +1,4 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
 /**
  * Norm computes norms of matrices.
@@ -9,7 +9,7 @@ package math.complex.mdc;
  * @version Pre-alpha
  * @author G. W. Stewart
  */
-final class Norm {
+public final class Norm {
 
     /**
      * Computes the Frobenius norm of a the submatrix (ii1:ii2, jj1,jj2) of a

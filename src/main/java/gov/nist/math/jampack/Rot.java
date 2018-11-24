@@ -1,4 +1,4 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
 /**
  * Rot generates and manipulates plane rotations. Given a 2-vector components
@@ -20,7 +20,7 @@ package math.complex.mdc;
  * @version Pre-alpha
  * @author G. W. Stewart
  */
-final class Rot {
+public final class Rot {
 
     /** The cosine of the rotation */
     double c;

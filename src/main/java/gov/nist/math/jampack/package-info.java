@@ -4,4 +4,4 @@
  * <p>
  * ftp://math.nist.gov/pub/Jampack/Jampack/AboutJampack.html
  */
-package math.complex.mdc;
+package gov.nist.math.jampack;

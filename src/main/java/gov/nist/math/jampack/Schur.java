@@ -1,4 +1,4 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
 /**
  * Schur implements the Schur decomposition of a matrix. Specifically, given a
@@ -13,7 +13,7 @@ package math.complex.mdc;
  * @version Pre-alpha
  * @author G. W. Stewart
  */
-final class Schur {
+public final class Schur {
 
     /** The upper triangular matrix. */
     final Zmat T;

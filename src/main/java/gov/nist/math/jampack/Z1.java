@@ -1,4 +1,4 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
 /**
  * Z1 implements a one-dimensional array of complex numbers as a two arrays of
@@ -9,7 +9,7 @@ package math.complex.mdc;
  * @version Pre-alpha
  * @author G. W. Stewart
  */
-final class Z1 {
+public final class Z1 {
 
     final int n;
     final double re[];

@@ -1,4 +1,4 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
 /**
  * H computes the conjugate transpose of a matrix and the transpose of a complex
@@ -7,7 +7,7 @@ package math.complex.mdc;
  * @version Pre-alpha
  * @author G. W. Stewart
  */
-final class H {
+public final class H {
 
     /**
      * Returns the conjugate transpose of a Zmat.

@@ -1,4 +1,4 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
 /**
  * Zdiagmat is a storage efficient representation of a complex diagonal matrix.
@@ -6,7 +6,7 @@ package math.complex.mdc;
  * @version Pre-alpha
  * @author G. W. Stewart
  */
-final class Zdiagmat {
+public final class Zdiagmat {
 
     /** The order of the matrix */
     final int order;

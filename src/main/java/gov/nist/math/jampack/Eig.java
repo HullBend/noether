@@ -1,4 +1,4 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
 /**
  * Eig implements the eigenvalue-vector decomposition of of a square matrix.
@@ -18,7 +18,7 @@ package math.complex.mdc;
  * @version Pre-alpha
  * @author G. W. Stewart
  */
-final class Eig {
+public final class Eig {
 
     /** The matrix of eigenvectors */
     Zmat X;

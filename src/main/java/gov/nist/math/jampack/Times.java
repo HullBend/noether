@@ -1,6 +1,6 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
-final class Times {
+public final class Times {
 
     /**
      * Computes the product of a Z and a Zmat.

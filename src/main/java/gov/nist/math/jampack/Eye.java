@@ -1,10 +1,10 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
 /**
  * Eye generates a matrix whose diagonal elements are one and whose off diagonal
  * elements are zero.
  */
-final class Eye {
+public final class Eye {
 
     /**
      * Generates an identity matrix of order <tt>n</tt>.

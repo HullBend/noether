@@ -1,4 +1,4 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
 /**
  * Zsvd implements the singular value decomposition of a Zmat. Specifically if X
@@ -29,7 +29,7 @@ package math.complex.mdc;
  * @version Pre-alpha
  * @author G. W. Stewart
  */
-final class Zsvd {
+public final class Zsvd {
 
     /** Limits the number of iterations in the SVD algorithm */
     private static final int MAXITER = 30;

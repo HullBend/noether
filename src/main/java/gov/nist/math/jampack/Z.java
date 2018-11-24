@@ -1,4 +1,4 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
 /**
  * Z is a mutable complex variable class. It is designed to perform complex
@@ -28,7 +28,7 @@ package math.complex.mdc;
  * @version Pre-alpha
  * @author G. W. Stewart
  */
-final class Z {
+public final class Z {
 
     /** Complex 1. */
     static final Z ONE = new Z(1, 0);

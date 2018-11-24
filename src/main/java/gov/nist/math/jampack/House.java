@@ -1,4 +1,4 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
 /**
  * House provides static methods to generate and apply Householder
@@ -7,7 +7,7 @@ package math.complex.mdc;
  * @version Pre-alpha
  * @author G. W. Stewart
  */
-final class House {
+public final class House {
 
     /**
      * Generates a Householder transformation from within the part of column c

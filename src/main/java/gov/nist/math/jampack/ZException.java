@@ -1,4 +1,4 @@
-package math.complex.mdc;
+package gov.nist.math.jampack;
 
 /**
  * This is the exception class for Jampack. Since most errors in matrix
@@ -9,7 +9,7 @@ package math.complex.mdc;
  * @author G. W. Stewart
  */
 @SuppressWarnings("serial")
-final class ZException extends RuntimeException {
+public final class ZException extends RuntimeException {
     ZException(String s) {
         super(s);
     }
