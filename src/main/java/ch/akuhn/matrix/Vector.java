@@ -236,6 +236,9 @@ public abstract class Vector {
      * @param start
      */
     public void storeOn(double[] array, int start) {
+        if (start + size() > array.length) {
+            throw new IllegalArgumentException("start + size() > array.length");
+        }
         Arrays.fill(array, start, start + size(), 0.0);
         for (Entry each : entries()) {
             array[start + each.index] = each.value;
