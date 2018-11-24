@@ -280,6 +280,9 @@ public abstract class Matrix {
      * @return the result
      */
     public Vector transposeMultiply(Vector x) {
+        if (x.size() != rowCount()) {
+            throw new IllegalArgumentException("Vector.size() : " + x.size());
+        }
         Vector y = Vector.dense(this.columnCount());
         int i = 0;
         for (Vector row : rows()) {
@@ -309,6 +312,9 @@ public abstract class Matrix {
      * @return the matrix
      */
     public static Matrix from(int n, int m, double... values) {
+        if (n * m != values.length) {
+            throw new IllegalArgumentException("n * m != values.length");
+        }
         double[][] data = new double[n][];
         for (int i = 0; i < n; i++) {
             data[i] = Arrays.copyOfRange(values, i * m, (i + 1) * m);
