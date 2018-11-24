@@ -1,6 +1,5 @@
 package ch.akuhn.matrix;
 
-import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -245,7 +244,7 @@ public abstract class Vector {
 
     @Override
     public String toString() {
-        final StringWriter out = new StringWriter();
+        StringBuilder out = new StringBuilder();
         out.append("(");
         for (Entry each : entries()) {
             out.append(each.value + ", ");
