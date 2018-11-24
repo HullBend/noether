@@ -319,7 +319,7 @@ public final class Zmat {
     /**
      * Returns the submatrix (ii[], jj1:jj2).
      * 
-     * @param i[]
+     * @param ii
      *            Contains the row indices of the submatrix
      * @param jj1
      *            The lower column index
@@ -341,7 +341,7 @@ public final class Zmat {
     /**
      * Overwrites the submatrix (ii[], jj1:jj2) with a Zmat.
      * 
-     * @param i[]
+     * @param ii
      *            Contains the row indices of the submatrix
      * @param jj1
      *            The lower column index
@@ -367,7 +367,7 @@ public final class Zmat {
      *            The lower row index
      * @param ii2
      *            The upper row index
-     * @param jj[]
+     * @param jj
      *            Contains the column indices of the submatrix
      */
     public Zmat get(int ii1, int ii2, int jj[]) {
@@ -389,7 +389,7 @@ public final class Zmat {
      *            The lower row index
      * @param ii2
      *            The upper row index
-     * @param jj[]
+     * @param jj
      *            Contains the column indices of the submatrix
      * @param A
      *            The new value of the submatrix
@@ -407,9 +407,9 @@ public final class Zmat {
     /**
      * Returns the submatrix (ii[], jj[]).
      * 
-     * @param ii[]
+     * @param ii
      *            Contains the row indices of the submatrix
-     * @param jj[]
+     * @param jj
      *            Contains the column indices of the submatrix
      */
     public Zmat get(int ii[], int jj[]) {
@@ -428,9 +428,9 @@ public final class Zmat {
      * Overwrites the submatrix (ii[], jj[]) with a Zmat. Returns the submatrix
      * (ii[], jj[])
      * 
-     * @param ii[]
+     * @param ii
      *            Contains the row indices of the submatrix
-     * @param jj[]
+     * @param jj
      *            Contains the column indices of the submatrix
      * @param A
      *            The value of the new submatrix

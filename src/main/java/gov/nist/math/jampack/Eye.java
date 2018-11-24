@@ -9,8 +9,7 @@ public final class Eye {
     /**
      * Generates an identity matrix of order <tt>n</tt>.
      * 
-     * @param <tt>n</tt>
-     *            The order of the matrix
+     * @param n the order of the matrix
      */
     public static Zmat o(int n) {
         return o(n, n);
@@ -20,10 +19,8 @@ public final class Eye {
      * Generates an <tt>mxn</tt> matrix whose diagonal elements are one and
      * whose off diagonal elements are zero.
      * 
-     * @param <tt>m</tt>
-     *            The number of rows in the matrix
-     * @param <tt>n</tt>
-     *            The number of columns in the matrix
+     * @param m the number of rows in the matrix
+     * @param n the number of columns in the matrix
      */
     public static Zmat o(int m, int n) {
 

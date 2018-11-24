@@ -47,9 +47,7 @@ public final class Zsvd {
      * Computes the SVD of a Zmat XX. Throws a ZException if the maximum number
      * of iterations is exceeded.
      * 
-     * @param XX
-     *            A Zmat
-     * @return The Zsvd of XX
+     * @param XX a Zmat
      * @exception ZException
      *                Thrown if maximum number of iterations is exceeded.<br>
      *                Passed from below.

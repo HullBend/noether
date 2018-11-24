@@ -20,7 +20,6 @@ public final class Z1 {
      * 
      * @param n
      *            a positive integer
-     * @return A Z1 of length n
      * @exception ZException
      *                Thrown if n<=0.
      */
@@ -47,11 +46,8 @@ public final class Z1 {
     /**
      * Sets the ith element of a Z1 to a Z.
      * 
-     * @param i
-     *            an integer
-     * @param z
-     *            a Z
-     * @return resets the ith element of this Z1 to z
+     * @param i an integer
+     * @param z a Z
      */
     public void put(int i, Z z) {
         re[i] = z.re;
@@ -61,13 +57,9 @@ public final class Z1 {
     /**
      * Sets the real and imaginary parts of the ith element of a Z1.
      * 
-     * @param i
-     *            an integer
-     * @param real
-     *            a double
-     * @param imag
-     *            a double
-     * @return resets the ith component of this Z1 to real + i*imag
+     * @param i an integer
+     * @param real a double
+     * @param imag a double
      */
     public void put(int i, double real, double imag) {
         re[i] = real;
@@ -77,11 +69,8 @@ public final class Z1 {
     /**
      * Multiplies the ith element of a Z1 by a Z.
      * 
-     * @param i
-     *            an integer
-     * @param z
-     *            a Z
-     * @return multiplies the ith element of this Z1 by z.
+     * @param i an integer
+     * @param z a Z
      */
     public void times(int i, Z z) {
         double t = re[i] * z.re - im[i] * z.im;

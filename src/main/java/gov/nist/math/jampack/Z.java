@@ -47,8 +47,6 @@ public final class Z {
 
     /**
      * Creates a Z and initializes it to zero.
-     * 
-     * @return a Z initialized to zero.
      */
     public Z() {
         re = 0.0;
@@ -58,11 +56,8 @@ public final class Z {
     /**
      * Creates a Z and initializes its real and imaginary parts.
      * 
-     * @param x
-     *            a double
-     * @param y
-     *            a double
-     * @return x + iy
+     * @param x a double
+     * @param y a double
      */
     public Z(double x, double y) {
         re = x;
@@ -72,9 +67,7 @@ public final class Z {
     /**
      * Creates a Z and initializes its real part.
      * 
-     * @param x
-     *            a double
-     * @return x + i*0
+     * @param x a double
      */
     public Z(double x) {
         re = x;
@@ -84,9 +77,7 @@ public final class Z {
     /**
      * Creates a Z and initializes it to another Z.
      * 
-     * @param a
-     *            a Z
-     * @return a
+     * @param a a Z
      */
     public Z(Z a) {
         re = a.re;
@@ -322,10 +313,7 @@ public final class Z {
     /**
      * Computes the principal value of the square root of a Z.
      * 
-     * @param a
-     *            a Z
-     * @param this
-     *            = sqrt(a)
+     * @param a a Z
      */
     public Z sqrt(Z a) {
         double t, tre, tim;
