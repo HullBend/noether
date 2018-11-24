@@ -36,6 +36,9 @@ public class AllEigenvalues extends Eigenvalues {
      */
     public AllEigenvalues(Matrix A) {
         super(A.columnCount());
+        if (!A.isSquare()) {
+            throw new IllegalArgumentException("A is not square");
+        }
         this.A = A;
     }
 

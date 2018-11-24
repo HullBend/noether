@@ -59,6 +59,9 @@ public abstract class FewEigenvalues extends Eigenvalues {
     private Which which;
 
     public static FewEigenvalues of(final Matrix matrix) {
+        if (!matrix.isSquare()) {
+            throw new IllegalArgumentException("matrix is not square");
+        }
         return new FewEigenvalues(matrix.columnCount()) {
             @Override
             protected Vector callback(Vector vector) {

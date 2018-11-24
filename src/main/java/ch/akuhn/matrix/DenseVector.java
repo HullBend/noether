@@ -26,6 +26,9 @@ public class DenseVector extends Vector {
      * @return the cosine
      */
     public double cosine(DenseVector other) {
+        if (other.size() != size()) {
+            throw new IllegalArgumentException("other.size() != this.size()");
+        }
         double sum = 0.0;
         for (int n = 0; n < values.length; n++) {
             sum += values[n] * other.values[n];
@@ -82,6 +85,9 @@ public class DenseVector extends Vector {
 
     @Override
     public boolean equals(Vector v, double epsilon) {
+        if (!(v instanceof DenseVector)) {
+            return false;
+        }
         if (size() != v.size()) {
             return false;
         }
