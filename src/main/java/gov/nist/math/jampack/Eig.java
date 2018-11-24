@@ -21,10 +21,10 @@ package gov.nist.math.jampack;
 public final class Eig {
 
     /** The matrix of eigenvectors */
-    Zmat X;
+    public Zmat X;
 
     /** The diagonal matrix of eigenvalues */
-    Zdiagmat D;
+    public Zdiagmat D;
 
     /**
      * Creates an eigenvalue-vector decomposition of a square matrix A.
@@ -35,7 +35,7 @@ public final class Eig {
      *                Thrown if A is not square. <br>
      *                Passed from below.
      */
-    Eig(Zmat A) throws ZException {
+    public Eig(Zmat A) throws ZException {
         int i, j, k;
         double norm, scale;
         Z z, d;

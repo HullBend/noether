@@ -25,13 +25,13 @@ public final class Rot {
     /** The cosine of the rotation */
     double c;
     /** The real part of the sine of the rotation */
-    double sr;
+    public double sr;
     /** The imaginary part of the sine of the rotation */
-    double si;
+    public double si;
     /** The real part of the first component of the transformed vector */
-    double zr;
+    public double zr;
     /** The imaginary part of the first component of the transformed vector */
-    double zi;
+    public double zi;
 
     /**
      * Given a real 2-vectc, genc generates a real plane rotation P such that
@@ -48,7 +48,7 @@ public final class Rot {
      * @param P
      *            The plane rotation
      */
-    static void genc(double x, double y, Rot P) {
+    public static void genc(double x, double y, Rot P) {
         P.si = 0.0;
         P.zi = 0.0;
 
@@ -80,7 +80,7 @@ public final class Rot {
      * @param P
      *            The rotation
      */
-    static void genr(double x, double y, Rot P) {
+    public static void genr(double x, double y, Rot P) {
         P.si = 0.0;
         P.zi = 0.0;
 
@@ -115,7 +115,7 @@ public final class Rot {
      * @param jj2
      *            The index of the second column
      */
-    static void ap(Zmat A, Rot P, int ii1, int ii2, int jj1, int jj2) {
+    public static void ap(Zmat A, Rot P, int ii1, int ii2, int jj1, int jj2) {
         double t1r, t1i, t2r, t2i;
 
         int i1 = ii1 - 1;
@@ -152,7 +152,7 @@ public final class Rot {
      * @param jj2
      *            The index of the second column
      */
-    static void aph(Zmat A, Rot P, int ii1, int ii2, int jj1, int jj2) {
+    public static void aph(Zmat A, Rot P, int ii1, int ii2, int jj1, int jj2) {
         double t1r, t1i, t2r, t2i;
 
         int i1 = ii1 - 1;
@@ -192,7 +192,7 @@ public final class Rot {
      * @param P
      *            The rotation (must be initialized)
      */
-    static void genc(double xr, double xi, double yr, double yi, Rot P) {
+    public static void genc(double xr, double xi, double yr, double yi, Rot P) {
         double s, absx, absxy;
 
         if (xr == 0.0 && xi == 0.0) {
@@ -234,7 +234,7 @@ public final class Rot {
      * @param P
      *            The plane rotation (must be initialized)
      */
-    static void genc(Zmat A, int ii1, int ii2, int jj, Rot P) {
+    public static void genc(Zmat A, int ii1, int ii2, int jj, Rot P) {
         int i1 = ii1 - 1;
         int i2 = ii2 - 1;
         int j = jj - 1;
@@ -263,7 +263,7 @@ public final class Rot {
      * @param jj2
      *            The second index of the range of the rows
      */
-    static void pa(Rot P, Zmat A, int ii1, int ii2, int jj1, int jj2) {
+    public static void pa(Rot P, Zmat A, int ii1, int ii2, int jj1, int jj2) {
         double t1r, t1i, t2r, t2i;
 
         int i1 = ii1 - 1;

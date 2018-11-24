@@ -16,10 +16,10 @@ package gov.nist.math.jampack;
 public final class Schur {
 
     /** The upper triangular matrix. */
-    final Zmat T;
+    public final Zmat T;
 
     /** The unitary matrix. */
-    final Zmat U;
+    public final Zmat U;
 
     /** Limits the number of iterations in the QR algorithm */
     private static final int MAXITER = 30;
@@ -33,7 +33,7 @@ public final class Schur {
      *                Thrown for non-quadratic matrix.<br>
      *                Thrown for maximum iteration count exceeded.
      */
-    Schur(Zmat A) throws ZException {
+    public Schur(Zmat A) throws ZException {
         int i, il, iter, iu;
         double d, sd, sf;
         Z b = new Z(), c = new Z(), disc = new Z(), kappa = new Z(), p, q, r, r1 = new Z(), r2 = new Z(), s,

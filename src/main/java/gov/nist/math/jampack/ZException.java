@@ -10,7 +10,7 @@ package gov.nist.math.jampack;
  */
 @SuppressWarnings("serial")
 public final class ZException extends RuntimeException {
-    ZException(String s) {
+    public ZException(String s) {
         super(s);
     }
 }

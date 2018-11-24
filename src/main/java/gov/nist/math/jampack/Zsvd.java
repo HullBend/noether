@@ -35,13 +35,13 @@ public final class Zsvd {
     private static final int MAXITER = 30;
 
     /** The matrix of left singular vectors */
-    final Zmat U;
+    public final Zmat U;
 
     /** The matrix of right singular vectors */
-    final Zmat V;
+    public final Zmat V;
 
     /** The diagonal matrix of singular values */
-    final Zdiagmat S;
+    public final Zdiagmat S;
 
     /**
      * Computes the SVD of a Zmat XX. Throws a ZException if the maximum number
@@ -54,7 +54,7 @@ public final class Zsvd {
      *                Thrown if maximum number of iterations is exceeded.<br>
      *                Passed from below.
      */
-    Zsvd(Zmat XX) throws ZException {
+    public Zsvd(Zmat XX) throws ZException {
 
         int i, il, iu, iter, j, k, kk, m, mc;
 

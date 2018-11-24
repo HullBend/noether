@@ -18,7 +18,7 @@ public final class Zdiagmat {
     final double im[];
 
     /** The order of the matrix (public) */
-    final int n;
+    public final int n;
 
     /** The index of the last diagonal (public) */
     final int dx;
@@ -30,7 +30,7 @@ public final class Zdiagmat {
      *            The order of the new Zdiagmat
      * @return A Zdiagmat initialized to zero.
      */
-    Zdiagmat(int order) {
+    public Zdiagmat(int order) {
         this.order = order;
         dx = order;
         n = order;
@@ -47,7 +47,7 @@ public final class Zdiagmat {
      *            The value to which the diagonal is to be initialized
      * @return A Zdiagmat whose diagonal is val.
      */
-    Zdiagmat(int order, Z val) {
+    public Zdiagmat(int order, Z val) {
         this.order = order;
         dx = order;
         n = order;
@@ -66,7 +66,7 @@ public final class Zdiagmat {
      *            A Z1
      * @return A Zdiagmat whose diagonal elements are the elements of val.
      */
-    Zdiagmat(Z1 val) {
+    public Zdiagmat(Z1 val) {
         order = val.re.length;
         dx = order;
         n = order;
@@ -90,7 +90,7 @@ public final class Zdiagmat {
      * @exception ZException
      *                Thrown for k to large or small.
      */
-    Zdiagmat(Zmat A, int k) throws ZException {
+    public Zdiagmat(Zmat A, int k) throws ZException {
         if (k >= 0) {
             if (k >= A.ncol) {
                 throw new ZException("Diagonal out of range.");
@@ -129,7 +129,7 @@ public final class Zdiagmat {
      * @exception ZException
      *                Passed from below.
      */
-    Zdiagmat(Zmat A) throws ZException {
+    public Zdiagmat(Zmat A) throws ZException {
         this(A, 0);
     }
 
@@ -140,7 +140,7 @@ public final class Zdiagmat {
      *            A Zdiagmat
      * @returns A Zdiagmat that is a copy of D.
      */
-    Zdiagmat(Zdiagmat D) {
+    public Zdiagmat(Zdiagmat D) {
         order = D.order;
         dx = order;
         n = order;
@@ -160,7 +160,7 @@ public final class Zdiagmat {
      *            An integer
      * @return The ii-th element of this Zdiagmat
      */
-    Z get(int ii) {
+    public Z get(int ii) {
         return new Z(re[ii - 1], im[ii - 1]);
     }
 
@@ -173,7 +173,7 @@ public final class Zdiagmat {
      *            A Z
      * @return Resets the ii-th diagonal element of this Zdiagmat to val.
      */
-    void put(int ii, Z val) {
+    public void put(int ii, Z val) {
         re[ii - 1] = val.re;
         im[ii - 1] = val.im;
     }

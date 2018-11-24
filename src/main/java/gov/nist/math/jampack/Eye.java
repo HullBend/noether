@@ -12,7 +12,7 @@ public final class Eye {
      * @param <tt>n</tt>
      *            The order of the matrix
      */
-    static Zmat o(int n) {
+    public static Zmat o(int n) {
         return o(n, n);
     }
 
@@ -25,7 +25,7 @@ public final class Eye {
      * @param <tt>n</tt>
      *            The number of columns in the matrix
      */
-    static Zmat o(int m, int n) {
+    public static Zmat o(int m, int n) {
 
         Zmat I = new Zmat(m, n);
 

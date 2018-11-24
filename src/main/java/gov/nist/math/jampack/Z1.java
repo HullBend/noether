@@ -24,7 +24,7 @@ public final class Z1 {
      * @exception ZException
      *                Thrown if n<=0.
      */
-    Z1(int n) throws ZException {
+    public Z1(int n) throws ZException {
         if (n <= 0) {
             throw new ZException("Nonpositive dimension.");
         }
@@ -40,7 +40,7 @@ public final class Z1 {
      *            an integer
      * @return The ith element of this Z1
      */
-    Z get(int i) {
+    public Z get(int i) {
         return new Z(re[i], im[i]);
     }
 
@@ -53,7 +53,7 @@ public final class Z1 {
      *            a Z
      * @return resets the ith element of this Z1 to z
      */
-    void put(int i, Z z) {
+    public void put(int i, Z z) {
         re[i] = z.re;
         im[i] = z.im;
     }
@@ -69,7 +69,7 @@ public final class Z1 {
      *            a double
      * @return resets the ith component of this Z1 to real + i*imag
      */
-    void put(int i, double real, double imag) {
+    public void put(int i, double real, double imag) {
         re[i] = real;
         im[i] = imag;
     }
@@ -83,7 +83,7 @@ public final class Z1 {
      *            a Z
      * @return multiplies the ith element of this Z1 by z.
      */
-    void times(int i, Z z) {
+    public void times(int i, Z z) {
         double t = re[i] * z.re - im[i] * z.im;
         im[i] = re[i] * z.im + im[i] * z.re;
         re[i] = t;

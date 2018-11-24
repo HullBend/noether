@@ -11,7 +11,7 @@ public final class Times {
      *            The Zmat
      * @return zA
      */
-    static Zmat o(Z z, Zmat A) {
+    public static Zmat o(Z z, Zmat A) {
         Zmat B = new Zmat(A.nrow, A.ncol);
         for (int i = 0; i < A.nrow; i++)
             for (int j = 0; j < A.ncol; j++) {
@@ -32,7 +32,7 @@ public final class Times {
      * @exception ZException
      *                for unconformity
      */
-    static Zmat o(Zmat A, Zmat B) throws ZException {
+    public static Zmat o(Zmat A, Zmat B) throws ZException {
         if (A.ncol != B.nrow)
             throw new ZException("Unconformity in product");
         Zmat C = new Zmat(A.nrow, B.ncol);
@@ -52,7 +52,7 @@ public final class Times {
      *            The Zmat
      * @return A<sup>H</sup>A
      */
-    static Zmat aha(Zmat A) {
+    public static Zmat aha(Zmat A) {
         Zmat C = new Zmat(A.ncol, A.ncol, true);
         for (int k = 0; k < A.nrow; k++) {
             for (int i = 0; i < A.ncol; i++) {
@@ -80,7 +80,7 @@ public final class Times {
      *            The Zmat
      * @return AA<sup>H</sup>
      */
-    static Zmat aah(Zmat A) {
+    public static Zmat aah(Zmat A) {
         Zmat C = new Zmat(A.nrow, A.nrow, true);
         for (int i = 0; i < A.nrow; i++) {
             for (int k = 0; k < A.ncol; k++) {
@@ -108,7 +108,7 @@ public final class Times {
      *            The Zdiagmat
      * @return zD
      */
-    static Zdiagmat o(Z z, Zdiagmat D) {
+    public static Zdiagmat o(Z z, Zdiagmat D) {
         Zdiagmat B = new Zdiagmat(D);
         for (int i = 0; i < D.order; i++) {
             B.re[i] = z.re * D.re[i] - z.im * D.im[i];
@@ -128,7 +128,7 @@ public final class Times {
      * @exception ZException
      *                for unconformity
      */
-    static Zdiagmat o(Zdiagmat D1, Zdiagmat D2) throws ZException {
+    public static Zdiagmat o(Zdiagmat D1, Zdiagmat D2) throws ZException {
         if (D1.order != D2.order) {
             throw new ZException("Unconformity in product");
         }
@@ -151,7 +151,7 @@ public final class Times {
      * @exception ZException
      *                for unconformity
      */
-    static Zmat o(Zdiagmat D, Zmat A) throws ZException {
+    public static Zmat o(Zdiagmat D, Zmat A) throws ZException {
         if (D.order != A.nrow) {
             throw new ZException("Unconformity in product.");
         }
@@ -176,7 +176,7 @@ public final class Times {
      * @exception ZException
      *                for unconformity
      */
-    static Zmat o(Zmat A, Zdiagmat D) throws ZException {
+    public static Zmat o(Zmat A, Zdiagmat D) throws ZException {
         if (D.order != A.ncol) {
             throw new ZException("Unconformity in product.");
         }

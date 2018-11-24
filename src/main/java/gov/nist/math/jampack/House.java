@@ -27,7 +27,7 @@ public final class House {
      * @exception ZException
      *                Passed from below.
      */
-    static Z1 genc(Zmat A, int r1, int r2, int c) throws ZException {
+    public static Z1 genc(Zmat A, int r1, int r2, int c) throws ZException {
         int i, ru;
         double norm;
         double s;
@@ -101,7 +101,7 @@ public final class House {
      * @exception ZException
      *                Passed from below.
      */
-    static Z1 genr(Zmat A, int r, int c1, int c2) throws ZException {
+    public static Z1 genr(Zmat A, int r, int c1, int c2) throws ZException {
         int j, cu;
         double norm, s;
         Z scale;
@@ -184,7 +184,7 @@ public final class House {
      * @exception ZException
      *                Thrown if either u or v is too short.
      */
-    static Zmat ua(Z1 u, Zmat A, int r1, int r2, int c1, int c2, Z1 v) throws ZException {
+    public static Zmat ua(Z1 u, Zmat A, int r1, int r2, int c1, int c2, Z1 v) throws ZException {
         int i, j;
 
         if (r2 < r1 || c2 < c1) {
@@ -253,7 +253,7 @@ public final class House {
      * @exception ZException
      *                Thrown if either u or v is too short.
      */
-    static Zmat au(Zmat A, Z1 u, int r1, int r2, int c1, int c2, Z1 v) throws ZException {
+    public static Zmat au(Zmat A, Z1 u, int r1, int r2, int c1, int c2, Z1 v) throws ZException {
         int i, j;
 
         if (r2 < r1 || c2 < c1) {

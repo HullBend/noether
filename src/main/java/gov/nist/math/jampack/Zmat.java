@@ -23,16 +23,16 @@ public final class Zmat {
     final double im[][];
 
     /** The upper row index */
-    final int rx;
+    public final int rx;
 
     /** The number of rows */
-    final int nr;
+    public final int nr;
 
     /** The upper column index */
-    final int cx;
+    public final int cx;
 
     /** The number of columns */
-    final int nc;
+    public final int nc;
 
     /**
      * Creates a Zmat and initializes its real and imaginary parts to a pair of
@@ -45,7 +45,7 @@ public final class Zmat {
      * @exception ZException
      *                if the dimensions of re and im do not match
      */
-    Zmat(double re[][], double im[][]) throws ZException {
+    public Zmat(double re[][], double im[][]) throws ZException {
         nrow = re.length;
         ncol = re[0].length;
         if (nrow != im.length || ncol != im[0].length)
@@ -66,7 +66,7 @@ public final class Zmat {
     /**
      * Creates a Zmat and initializes it to an array of class Z.
      */
-    Zmat(Z A[][]) {
+    public Zmat(Z A[][]) {
         nrow = A.length;
         ncol = A[0].length;
         rx = nrow;
@@ -86,7 +86,7 @@ public final class Zmat {
      * Creates a Zmat and initializes its real part to to an array of class
      * double. The imaginary part is set to zero.
      */
-    Zmat(double A[][]) {
+    public Zmat(double A[][]) {
         nrow = A.length;
         ncol = A[0].length;
         rx = nrow;
@@ -105,7 +105,7 @@ public final class Zmat {
     /**
      * Creates a Zmat and intitializes it to a Zmat.
      */
-    Zmat(Zmat A) {
+    public Zmat(Zmat A) {
         nrow = A.nrow;
         ncol = A.ncol;
         rx = nrow;
@@ -124,7 +124,7 @@ public final class Zmat {
     /**
      * Creates a Zmat and initialize it to a Z1.
      */
-    Zmat(Z1 A) {
+    public Zmat(Z1 A) {
         nrow = A.n;
         ncol = 1;
         rx = nrow;
@@ -142,7 +142,7 @@ public final class Zmat {
     /**
      * Creates a Zmat and initialize it to a Zdiagmat.
      */
-    Zmat(Zdiagmat D) {
+    public Zmat(Zdiagmat D) {
         nrow = D.n;
         ncol = D.n;
         rx = nrow;
@@ -160,7 +160,7 @@ public final class Zmat {
     /**
      * Creates a Zmat and initializes it to zero.
      */
-    Zmat(int nrow, int ncol) {
+    public Zmat(int nrow, int ncol) {
         this(nrow, ncol, false);
     }
 
@@ -184,7 +184,7 @@ public final class Zmat {
     /**
      * Returns a copy of the real part of a Zmat.
      */
-    double[][] getRe() {
+    public double[][] getRe() {
         double[][] A = new double[nrow][ncol];
         for (int i = 0; i < nrow; i++)
             for (int j = 0; j < ncol; j++)
@@ -195,7 +195,7 @@ public final class Zmat {
     /**
      * Returns a copy of the imaginary part of a Zmat.
      */
-    double[][] getIm() {
+    public double[][] getIm() {
         double[][] A = new double[nrow][ncol];
         for (int i = 0; i < nrow; i++)
             for (int j = 0; j < ncol; j++)
@@ -206,7 +206,7 @@ public final class Zmat {
     /**
      * Returns a copy of the real and imaginary parts as a complex array.
      */
-    Z[][] getZ() {
+    public Z[][] getZ() {
         Z[][] A = new Z[nrow][ncol];
         for (int i = 0; i < nrow; i++)
             for (int j = 0; j < ncol; j++)
@@ -222,7 +222,7 @@ public final class Zmat {
      * @param jj
      *            The column index of the element
      */
-    Z get(int ii, int jj) {
+    public Z get(int ii, int jj) {
         return new Z(re[ii - 1][jj - 1], im[ii - 1][jj - 1]);
     }
 
@@ -248,7 +248,7 @@ public final class Zmat {
      * @param a
      *            The new value of the element
      */
-    void put(int ii, int jj, Z a) {
+    public void put(int ii, int jj, Z a) {
         re[ii - 1][jj - 1] = a.re;
         im[ii - 1][jj - 1] = a.im;
     }
@@ -280,7 +280,7 @@ public final class Zmat {
      * @param jj2
      *            The upper row index
      */
-    Zmat get(int ii1, int ii2, int jj1, int jj2) {
+    public Zmat get(int ii1, int ii2, int jj1, int jj2) {
         int nrow = ii2 - ii1 + 1;
         int ncol = jj2 - jj1 + 1;
         Zmat A = new Zmat(nrow, ncol);
@@ -306,7 +306,7 @@ public final class Zmat {
      * @param A
      *            The new value of the submatrix
      */
-    void put(int ii1, int ii2, int jj1, int jj2, Zmat A) {
+    public void put(int ii1, int ii2, int jj1, int jj2, Zmat A) {
         int nrow = ii2 - ii1 + 1;
         int ncol = jj2 - jj1 + 1;
         for (int i = 0; i < nrow; i++)
@@ -326,7 +326,7 @@ public final class Zmat {
      * @param jj2
      *            The upper column index
      */
-    Zmat get(int ii[], int jj1, int jj2) {
+    public Zmat get(int ii[], int jj1, int jj2) {
         int nrow = ii.length;
         int ncol = jj2 - jj1 + 1;
         Zmat A = new Zmat(nrow, ncol);
@@ -350,7 +350,7 @@ public final class Zmat {
      * @param A
      *            The new value of the submatrix.
      */
-    void put(int ii[], int jj1, int jj2, Zmat A) {
+    public void put(int ii[], int jj1, int jj2, Zmat A) {
         int nrow = ii.length;
         int ncol = jj2 - jj1 + 1;
         for (int i = 0; i < nrow; i++)
@@ -370,7 +370,7 @@ public final class Zmat {
      * @param jj[]
      *            Contains the column indices of the submatrix
      */
-    Zmat get(int ii1, int ii2, int jj[]) {
+    public Zmat get(int ii1, int ii2, int jj[]) {
         int nrow = ii2 - ii1 + 1;
         int ncol = jj.length;
         Zmat A = new Zmat(nrow, ncol);
@@ -394,7 +394,7 @@ public final class Zmat {
      * @param A
      *            The new value of the submatrix
      */
-    void put(int ii1, int ii2, int jj[], Zmat A) {
+    public void put(int ii1, int ii2, int jj[], Zmat A) {
         int nrow = ii2 - ii1 + 1;
         int ncol = jj.length;
         for (int i = 0; i < nrow; i++)
@@ -412,7 +412,7 @@ public final class Zmat {
      * @param jj[]
      *            Contains the column indices of the submatrix
      */
-    Zmat get(int ii[], int jj[]) {
+    public Zmat get(int ii[], int jj[]) {
         int nrow = ii.length;
         int ncol = jj.length;
         Zmat A = new Zmat(nrow, ncol);
@@ -435,7 +435,7 @@ public final class Zmat {
      * @param A
      *            The value of the new submatrix
      */
-    void put(int ii[], int jj[], Zmat A) {
+    public void put(int ii[], int jj[], Zmat A) {
         int nrow = ii.length;
         int ncol = jj.length;
         for (int i = 0; i < nrow; i++)

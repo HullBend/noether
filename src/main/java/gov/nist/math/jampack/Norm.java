@@ -27,7 +27,7 @@ public final class Norm {
      *            The upper column index
      * @return The Frobenius norm of A(ii1:ii2, jj1:jj2)
      */
-    static double fro(Zmat A, int ii1, int ii2, int jj1, int jj2) {
+    public static double fro(Zmat A, int ii1, int ii2, int jj1, int jj2) {
         int i, i1, i2, j, j1, j2;
         double fac, nrm, scale;
 
@@ -68,7 +68,7 @@ public final class Norm {
      *            The Zmat
      * @return The Frobenius norm of A
      */
-    static double fro(Zmat A) {
+    public static double fro(Zmat A) {
         return Norm.fro(A, 1, A.rx, 1, A.cx);
     }
 
@@ -79,7 +79,7 @@ public final class Norm {
      *            The Z1
      * @return The Frobenius norm of u
      */
-    static double fro(Z1 u) {
+    public static double fro(Z1 u) {
         int i;
         double fac, nrm, scale;
 
@@ -115,7 +115,7 @@ public final class Norm {
      *            The Zdiagmat
      * @return The Frobenius norm of D
      */
-    static double fro(Zdiagmat D) {
+    public static double fro(Zdiagmat D) {
         int i;
         double fac, nrm, scale;
 

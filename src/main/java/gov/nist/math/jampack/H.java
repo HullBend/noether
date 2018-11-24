@@ -16,7 +16,7 @@ public final class H {
      *            The matrix to be conjugated and transposed
      * @return The conjugate transpose of A
      */
-    static Zmat o(Zmat A) {
+    public static Zmat o(Zmat A) {
         Zmat Ah = new Zmat(A.nc, A.nr);
         for (int i = 0; i < A.nr; i++)
             for (int j = 0; j < A.nc; j++) {
@@ -33,7 +33,7 @@ public final class H {
      *            The matrix to be conjugated (and transposed)
      * @return The conjugate transpose of D
      */
-    static Zdiagmat o(Zdiagmat D) {
+    public static Zdiagmat o(Zdiagmat D) {
         Zdiagmat Dh = new Zdiagmat(D);
         for (int i = 0; i < Dh.n; i++) {
             Dh.im[i] = -Dh.im[i];
@@ -48,7 +48,7 @@ public final class H {
      *            The matrix to be transposed
      * @return The transpose of A
      */
-    static Zmat trans(Zmat A) {
+    public static Zmat trans(Zmat A) {
         Zmat Ah = new Zmat(A.nc, A.nr);
         for (int i = 0; i < A.nr; i++)
             for (int j = 0; j < A.nc; j++) {
