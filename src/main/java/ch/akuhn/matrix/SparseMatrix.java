@@ -15,6 +15,8 @@ import ch.akuhn.matrix.Vector.Entry;
  */
 public class SparseMatrix extends Matrix {
 
+    private static final Random random = new Random();
+
     private int columns;
 
     private List<Vector> rows;
@@ -27,8 +29,9 @@ public class SparseMatrix extends Matrix {
     public SparseMatrix(double[][] values) {
         this.columns = values[0].length;
         this.rows = new ArrayList<Vector>(values.length);
-        for (final double[] each : values)
+        for (double[] each : values) {
             addRow(each);
+        }
     }
 
     /**
@@ -40,8 +43,9 @@ public class SparseMatrix extends Matrix {
     public SparseMatrix(int rows, int columns) {
         this.columns = columns;
         this.rows = new ArrayList<Vector>(rows);
-        for (int times = 0; times < rows; times++)
+        for (int times = 0; times < rows; times++) {
             addRow();
+        }
     }
 
     @Override
@@ -56,8 +60,9 @@ public class SparseMatrix extends Matrix {
      */
     public int addColumn() {
         columns++;
-        for (final Vector each : rows)
+        for (Vector each : rows) {
             ((SparseVector) each).resizeTo(columns);
+        }
         return columns - 1;
     }
 
@@ -83,9 +88,10 @@ public class SparseMatrix extends Matrix {
      * @param values
      */
     public void addToRow(int row, Vector values) {
-        final Vector v = rows.get(row);
-        for (final Entry each : values.entries())
+        Vector v = rows.get(row);
+        for (Entry each : values.entries()) {
             v.add(each.index, each.value);
+        }
     }
 
     /**
@@ -94,12 +100,10 @@ public class SparseMatrix extends Matrix {
      * @return 2d double array
      */
     public double[][] asDenseDoubleDouble() {
-        final double[][] dense = new double[rowCount()][columnCount()];
-
+        double[][] dense = new double[rowCount()][columnCount()];
         for (int ri = 0; ri < rows.size(); ri++) {
-            final Vector row = rows.get(ri);
-
-            for (final Entry column : row.entries()) {
+            Vector row = rows.get(ri);
+            for (Entry column : row.entries()) {
                 dense[ri][column.index] = column.value;
             }
         }
@@ -112,8 +116,8 @@ public class SparseMatrix extends Matrix {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return obj instanceof SparseMatrix && rows.equals(((SparseMatrix) obj).rows);
+    public boolean equals(Object other) {
+        return other instanceof SparseMatrix && rows.equals(((SparseMatrix) other).rows);
     }
 
     @Override
@@ -160,8 +164,9 @@ public class SparseMatrix extends Matrix {
     @Override
     public int used() {
         int used = 0;
-        for (final Vector each : rows)
+        for (Vector each : rows) {
             used += each.used();
+        }
         return used;
     }
 
@@ -169,7 +174,7 @@ public class SparseMatrix extends Matrix {
      * Trim each row
      */
     public void trim() {
-        for (final Vector each : rows) {
+        for (Vector each : rows) {
             ((SparseVector) each).trim();
         }
     }
@@ -181,16 +186,16 @@ public class SparseMatrix extends Matrix {
      * @return the matrix
      */
     public static SparseMatrix readFrom(Scanner scan) {
-        final int columns = scan.nextInt();
-        final int rows = scan.nextInt();
+        int columns = scan.nextInt();
+        int rows = scan.nextInt();
         @SuppressWarnings("unused")
-        final int used = scan.nextInt();
-        final SparseMatrix matrix = new SparseMatrix(rows, columns);
+        int used = scan.nextInt();
+        SparseMatrix matrix = new SparseMatrix(rows, columns);
         for (int row = 0; row < rows; row++) {
             final int len = scan.nextInt();
             for (int i = 0; i < len; i++) {
-                final int column = scan.nextInt();
-                final double value = scan.nextDouble();
+                int column = scan.nextInt();
+                double value = scan.nextDouble();
                 matrix.put(row, column, value);
             }
         }
@@ -206,12 +211,12 @@ public class SparseMatrix extends Matrix {
      * @return the matrix
      */
     public static SparseMatrix random(int n, int m, double density) {
-        final Random random = new Random();
-        final SparseMatrix A = new SparseMatrix(n, m);
+        SparseMatrix A = new SparseMatrix(n, m);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (random.nextDouble() > density)
+                if (random.nextDouble() > density) {
                     continue;
+                }
                 A.put(i, j, random.nextDouble());
             }
         }
@@ -220,10 +225,10 @@ public class SparseMatrix extends Matrix {
 
     @Override
     public Vector mult(Vector dense) {
-        final double[] y = new double[this.rowCount()];
-        final double[] x = ((DenseVector) dense).values;
+        double[] y = new double[this.rowCount()];
+        double[] x = ((DenseVector) dense).values;
         for (int i = 0; i < y.length; i++) {
-            final SparseVector row = (SparseVector) rows.get(i);
+            SparseVector row = (SparseVector) rows.get(i);
             double sum = 0;
             for (int k = 0; k < row.used; k++) {
                 sum += x[row.keys[k]] * row.values[k];
@@ -235,10 +240,10 @@ public class SparseMatrix extends Matrix {
 
     @Override
     public Vector transposeMultiply(Vector dense) {
-        final double[] y = new double[this.columnCount()];
-        final double[] x = ((DenseVector) dense).values;
+        double[] y = new double[this.columnCount()];
+        double[] x = ((DenseVector) dense).values;
         for (int i = 0; i < x.length; i++) {
-            final SparseVector row = (SparseVector) rows.get(i);
+            SparseVector row = (SparseVector) rows.get(i);
             for (int k = 0; k < row.used; k++) {
                 y[row.keys[k]] += x[i] * row.values[k];
             }
