@@ -262,6 +262,9 @@ public abstract class Matrix {
      * 
      */
     public Vector mult(Vector x) {
+        if (x.size() != columnCount()) {
+            throw new IllegalArgumentException("Vector.size() : " + x.size());
+        }
         final Vector y = Vector.dense(this.rowCount());
         int i = 0;
         for (final Vector row : rows())

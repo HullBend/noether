@@ -81,7 +81,7 @@ public class MatrixTest {
         assertEquals(7*2+8*4+9*6, y.get(1), epsilon);
     }
 
-    @Test(expected=AssertionError.class)
+    @Test(expected=IllegalArgumentException.class)
     public void shouldFailWhenSizeDoesNotConform() {
         Matrix.dense(3,2).mult(Vector.dense(3));
     }
