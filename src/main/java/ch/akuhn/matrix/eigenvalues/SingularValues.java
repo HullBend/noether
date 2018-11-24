@@ -29,7 +29,7 @@ public class SingularValues {
      */
     public Vector[] vectorRight;
 
-    Matrix A;
+    final Matrix A;
     private int nev;
 
     /**
@@ -49,7 +49,7 @@ public class SingularValues {
      * @return this
      */
     public SingularValues decompose() {
-        final Eigenvalues eigen = new FewEigenvalues(A.rowCount()) {
+        Eigenvalues eigen = new FewEigenvalues(A.rowCount()) {
             @Override
             protected Vector callback(Vector v) {
                 return A.mult(A.transposeMultiply(v));
@@ -72,21 +72,20 @@ public class SingularValues {
     /**
      * Sample main
      * 
-     * @param args
-     *            ignored
+     * @param args ignored
      */
     public static void main(String... args) {
-        final SparseMatrix A = Matrix.sparse(400, 5000);
-        final Random rand = new Random(1);
+        SparseMatrix A = Matrix.sparse(400, 5000);
+        Random rand = new Random(1);
         for (int i = 0; i < A.rowCount(); i++) {
             for (int j = 0; j < A.columnCount(); j++) {
-                if (rand.nextDouble() > 0.2)
+                if (rand.nextDouble() > 0.2) {
                     continue;
+                }
                 A.put(i, j, rand.nextDouble() * 23);
             }
         }
-
-        final SingularValues singular = new SingularValues(A, 15).decompose();
+        SingularValues singular = new SingularValues(A, 15).decompose();
         System.out.println(Arrays.toString(singular.value));
     }
 }

@@ -15,9 +15,9 @@ import ch.akuhn.matrix.Vector;
  * This class use ARPACK to find a few eigenvalues (&lambda;) and corresponding
  * eigenvectors (<b>x</b>) for the standard eigenvalue problem:
  *
- * <PRE>
- * <CODE>A<b>x</b> = &lambda;<b>x</b></CODE>
- * </PRE>
+ * <pre>
+ * <code>A<b>x</b> = &lambda;<b>x</b></code>
+ * </pre>
  *
  * where <code>A</code> is an <code>n</code> &times; <code>n</code> real
  * symmetric matrix.
@@ -27,9 +27,9 @@ import ch.akuhn.matrix.Vector;
  * <em>which</em> eigenvalues you want to compute and to supply a matrix-vector
  * product
  *
- * <PRE>
+ * <pre>
  * <b>w</b> &larr; A<b>v</b>
- * </PRE>
+ * </pre>
  *
  * in the {@link #callback(Vector)} method.
  * <p>
@@ -37,15 +37,15 @@ import ch.akuhn.matrix.Vector;
  * <p>
  * <b>Example:</b>
  *
- * <PRE>
+ * <pre>
  * Matrix A = <i>&hellip;square matrix&hellip;</i>;
  * Eigenvalues eigen = Eigenvalues.of(A).largest(4);
  * eigen.run();
  * double[] l = eigen.values;
  * Vector[] x = eigen.vectors;
- * </PRE>
+ * </pre>
  *
- * @author Adrian Kuhn (Java) based on <CODE>ddsimp.f</CODE> by Richard Lehoucq,
+ * @author Adrian Kuhn (Java) based on <code>ddsimp.f</code> by Richard Lehoucq,
  *         Danny Sorensen, Chao Yang (Fortran)
  *
  * @see "http://www.caam.rice.edu/software/ARPACK/UG"
@@ -101,7 +101,7 @@ public abstract class FewEigenvalues extends Eigenvalues {
 
     /**
      * Compute eigenvalues from both end of the spectrum. When the
-     * <CODE>nev</CODE> is odd, compute one more from the high end than from the
+     * <code>nev</code> is odd, compute one more from the high end than from the
      * low end.
      */
     public FewEigenvalues fromBothEnds(int nev0) {
@@ -160,14 +160,13 @@ public abstract class FewEigenvalues extends Eigenvalues {
          * parameter IDO until either convergence is indicated or maxitr has
          * been exceeded.
          */
-
         while (true) {
             arpack.dsaupd(
                     ido, // reverse communication parameter
                     bmat, // "I" = standard problem
                     n, // problem size
                     which.name(), // which values are requested?
-                    nev, // who many values?
+                    nev, // how many values?
                     tol, // 0 = use machine precision
                     resid,
                     ncv,
@@ -179,14 +178,15 @@ public abstract class FewEigenvalues extends Eigenvalues {
                     workl,
                     workl.length,
                     info);
-            if (!(ido.val == 1 || ido.val == -1))
+            if (!(ido.val == 1 || ido.val == -1)) {
                 break;
+            }
             /*
              * Perform matrix vector multiplication
              *
              * y <--- OP*x
              *
-             * The user should supply his own matrix- vector multiplication
+             * The user should supply his own matrix-vector multiplication
              * routine here that takes workd(ipntr(1)) as the input, and return
              * the result to workd(ipntr(2)).
              */
