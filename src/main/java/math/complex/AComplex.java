@@ -43,7 +43,17 @@ abstract class AComplex implements IComplex {
     }
 
     public final double abs() {
-        return Math.hypot(re(), im());
+        // sqrt(a^2 + b^2) without under/overflow
+        double re = re();
+        double im = im();
+        if (Math.abs(re) > Math.abs(im)) {
+            double abs = im / re;
+            return Math.abs(re) * Math.sqrt(1 + abs * abs);
+        } else if (im != 0.0) {
+            double abs = re / im;
+            return Math.abs(im) * Math.sqrt(1 + abs * abs);
+        }
+        return 0.0;
     }
 
     public final boolean isNan() {
