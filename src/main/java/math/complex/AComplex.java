@@ -43,6 +43,9 @@ abstract class AComplex implements IComplex {
     }
 
     public final double abs() {
+        if (isInfinite()) {
+            return Double.POSITIVE_INFINITY;
+        }
         // sqrt(a^2 + b^2) without under/overflow
         double re = re();
         double im = im();
