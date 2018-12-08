@@ -51,10 +51,10 @@ abstract class AComplex implements IComplex {
         double im = im();
         if (Math.abs(re) > Math.abs(im)) {
             double abs = im / re;
-            return Math.abs(re) * Math.sqrt(1 + abs * abs);
+            return Math.abs(re) * Math.sqrt(1.0 + abs * abs);
         } else if (im != 0.0) {
             double abs = re / im;
-            return Math.abs(im) * Math.sqrt(1 + abs * abs);
+            return Math.abs(im) * Math.sqrt(1.0 + abs * abs);
         }
         return 0.0;
     }
