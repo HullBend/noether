@@ -84,6 +84,10 @@ public final class DMatrix {
         return layout == Layout.ROW_MAJOR;
     }
 
+    public boolean isSquare() {
+        return rows == cols;
+    }
+
     public DMatrix transformToColumnPackedInplace() {
         if (isColumnPacked()) {
             return this;
@@ -166,6 +170,10 @@ public final class DMatrix {
     private static double[] copyJaggedArray(double[][] data, Layout layoutOfCopy) {
         int _rows = data.length;
         int _cols = data[0].length;
+        if (_rows < 1 || _cols < 1) {
+            throw new IllegalArgumentException(
+                    "number of rows and columns must be strictly positive : (" + _rows + " x " + _cols + ")");
+        }
         double[] copy = new double[_rows * _cols];
         if (layoutOfCopy == Layout.COL_MAJOR) {
             for (int row = 0; row < _rows; ++row) {
