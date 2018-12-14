@@ -167,6 +167,90 @@ public final class DMatrix {
         return copy;
     }
 
+    /**
+     * Get a submatrix copy in {@linkplain Layout#COL_MAJOR} order.
+     * 
+     * @param r0
+     *            initial row index (left upper corner) in this matrix
+     * @param c0
+     *            initial col index (left upper corner) in this matrix
+     * @param r1
+     *            last row index (right lower corner) in this matrix
+     * @param c1
+     *            last col index (right lower corner) in this matrix
+     * @return the submatrix
+     */
+    public DMatrix getSubmatrixCopy(int r0, int c0, int r1, int c1) {
+        checkSubmatrixIndices(r0, c0, r1, c1);
+        checkLayout();
+        int _rows = r1 - r0 + 1;
+        int _cols = c1 - c0 + 1;
+        double[] sub = new double[_rows * _cols];
+        // Note: Submatrices are always created in COL_MAJOR order!
+        double[] myA = a;
+        if (layout == Layout.COL_MAJOR) {
+            int myRows = rows;
+            for (int col = 0; col < _cols; ++col) {
+                for (int row = 0; row < _rows; ++row) {
+                    // COL_MAJOR <- COL_MAJOR
+                    sub[col * _rows + row] = myA[(col + c0) * myRows + row + r0];
+                }
+            }
+        } else {
+            int myCols = cols;
+            for (int col = 0; col < _cols; ++col) {
+                for (int row = 0; row < _rows; ++row) {
+                    // COL_MAJOR <- ROW_MAJOR
+                    sub[col * _rows + row] = myA[(row + r0) * myCols + col + c0];
+                }
+            }
+        }
+        return new DMatrix(_rows, _cols, sub, Layout.COL_MAJOR, DoCopy.NO);
+    }
+
+    /**
+     * Set a submatrix from the values of matrix {@code X}. The values of matrix
+     * {@code X} are always copied beginning in the upper left corner (position
+     * {@code (0, 0)}) of matrix {@code X}.
+     * 
+     * @param r0
+     *            initial row index (left upper corner) in this matrix
+     * @param c0
+     *            initial col index (left upper corner) in this matrix
+     * @param r1
+     *            last row index (right lower corner) in this matrix
+     * @param c1
+     *            last col index (right lower corner) in this matrix
+     * @return this
+     */
+    public DMatrix setSubmatrix(int r0, int c0, int r1, int c1, DMatrix X) {
+        checkSubmatrixIndices(r0, c0, r1, c1);
+        checkLayout();
+        int _rows = r1 - r0 + 1;
+        int _cols = c1 - c0 + 1;
+        if (X.getRowDim() < _rows || X.getColDim() < _cols) {
+            throw new IllegalArgumentException("Matrix X is only (" + X.getRowDim() + " x " + X.getColDim() + ") but ("
+                    + _rows + " x " + _cols + ") values are necessary");
+        }
+        for (int col = c0; col <= c1; ++col) {
+            for (int row = r0; row <= r1; ++row) {
+                set(row, col, X.get(row - r0, col - c0));
+            }
+        }
+        return this;
+    }
+
+    private void checkSubmatrixIndices(int r0, int c0, int r1, int c1) {
+        checkIJ(r0, c0);
+        checkIJ(r1, c1);
+        int _rows = r1 - r0 + 1;
+        int _cols = c1 - c0 + 1;
+        if (_rows <= 0 || _cols <= 0) {
+            throw new IllegalArgumentException(
+                    "illegal submatrix indices : [" + r0 + ", " + c0 + ", " + r1 + ", " + c1 + "]");
+        }
+    }
+
     private static double[] copyJaggedArray(double[][] data, Layout layoutOfCopy) {
         int _rows = data.length;
         int _cols = data[0].length;
