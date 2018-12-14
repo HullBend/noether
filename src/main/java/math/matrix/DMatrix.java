@@ -221,6 +221,8 @@ public final class DMatrix {
      *            last row index (right lower corner) in this matrix
      * @param c1
      *            last col index (right lower corner) in this matrix
+     * @param X
+     *            the matrix that holds the values to set in this matrix
      * @return this
      */
     public DMatrix setSubmatrix(int r0, int c0, int r1, int c1, DMatrix X) {
