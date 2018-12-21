@@ -6,7 +6,7 @@ public final class Trumm {
             int incColA, int B_start, double[] B, int incRowB, int incColB) {
 
         if (alpha == 0.0) {
-            Gescal.gescal(m, n, 0.0, 0, B, incRowB, incColB);
+            Gescal.gescal(m, n, 0.0, B_start, B, incRowB, incColB);
             return;
         }
 
