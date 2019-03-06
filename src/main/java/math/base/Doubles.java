@@ -26,6 +26,23 @@ public final class Doubles {
         return Double.valueOf(x);
     }
 
+    public static void softmax(double[] x, double[] out) {
+        double max = x[0];
+        for (int i = 1; i < x.length; ++i) {
+            max = Math.max(max, x[i]);
+        }
+        double s = 0.0;
+        for (int i = 0; i < x.length; ++i) {
+            double q = Math.exp(x[i] - max);
+            s += q;
+            out[i] = q;
+        }
+        s = 1.0 / s;
+        for (int i = 0; i < x.length; ++i) {
+            out[i] *= s;
+        }
+    }
+
     private Doubles() {
         throw new AssertionError();
     }
